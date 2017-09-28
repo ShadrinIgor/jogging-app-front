@@ -1,0 +1,23 @@
+.display-inline{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.auth-form .display-inline input{
+    height: 30px;
+}
+
+.m-t-no{
+    margin-top: 0;
+}
+
+.reg-form{
+    left: 50%;
+    width: 500px;
+    margin-left: -250px;
+    margin-top: 50px;
+}
+
+.m-r-5{
+    margin-right: 5px;
+}
