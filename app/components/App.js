@@ -35,9 +35,11 @@ export default class App extends Component {
 
   }
 
-  componentDidMount() {
-    NotificationManager.success('Success message', 'Title here');
-    console.log('componentDidMount');
+  componentWillUpdate(nextProps, nextState) {
+    console.log('componentWillUpdate', nextProps);
+    if(nextProps.auth.error){
+      NotificationManager.error(nextProps.auth.error, 'Auth error');
+    }
   }
 
   setEmail() {
@@ -60,7 +62,7 @@ export default class App extends Component {
       <NotificationContainer/>
       <div className="panel panel-default">
         <div className="panel-heading row">
-          <div className="col-xs-6"><h2 className="m-t-no">Jogging app55</h2></div>
+          <div className="col-xs-6"><h2 className="m-t-no">Jogging app</h2></div>
           <div className="col-xs-6 auth-form text-right">
             <div className="form-group display-inline m-r-5">
               <input type="text" className="form-control" ref="email" placeholder="Email"
