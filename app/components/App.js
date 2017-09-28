@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {authLogin} from '../actions/AuthActions';
-import {ToastContainer, ToastStore} from 'react-toasts';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class Form extends Component {
   render() {
@@ -35,8 +35,9 @@ export default class App extends Component {
 
   }
 
-  componentWillMount() {
-    // ToastStore.success("It works !");
+  componentDidMount() {
+    NotificationManager.success('Success message', 'Title here');
+    console.log('componentDidMount');
   }
 
   setEmail() {
@@ -56,10 +57,10 @@ export default class App extends Component {
 
   render() {
     return <div className="container">
-      <ToastContainer store={ToastStore}/>
+      <NotificationContainer/>
       <div className="panel panel-default">
         <div className="panel-heading row">
-          <div className="col-xs-6"><h2 className="m-t-no">Jogging app</h2></div>
+          <div className="col-xs-6"><h2 className="m-t-no">Jogging app55</h2></div>
           <div className="col-xs-6 auth-form text-right">
             <div className="form-group display-inline m-r-5">
               <input type="text" className="form-control" ref="email" placeholder="Email"
