@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {authLogin} from '../actions/AuthActions';
 
 class Form extends Component {
   render() {
@@ -55,10 +56,12 @@ export default class App extends Component {
           <div className="col-xs-6"><h2 className="m-t-no">Jogging app</h2></div>
           <div className="col-xs-6 auth-form text-right">
             <div className="form-group display-inline m-r-5">
-              <input type="text" className="form-control" ref="email" placeholder="Email" onChange={this.setEmail.bind(this)}/>
+              <input type="text" className="form-control" ref="email" placeholder="Email"
+                     onChange={this.setEmail.bind(this)}/>
             </div>
             <div className="form-group display-inline m-r-5">
-              <input type="password" className="form-control" ref="password" placeholder="Password" onChange={this.setPassword.bind(this)}/>
+              <input type="password" className="form-control" ref="password" placeholder="Password"
+                     onChange={this.setPassword.bind(this)}/>
             </div>
             <div className="form-group display-inline">
               <a className="btn btn-sm btn-success" onClick={this.logIn.bind(this)}>Log in</a>
@@ -74,13 +77,13 @@ export default class App extends Component {
 export default connect(
   state => ({
     main_list: state.main,
-    content: state.content
+    auth: state.auth
   }),
   dispatch => ({
-    /*        getMainListActions: () => {
-     dispatch(getMainList());
-     },
-     getContentActions: (menu_id) => {
+    getMainListActions: (email, password) => {
+      dispatch(authLogin(email, password));
+    }
+    /*     getContentActions: (menu_id) => {
      dispatch(getContent(menu_id));
      },
      updateCards: (list)=> {
