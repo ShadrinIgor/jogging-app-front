@@ -27,20 +27,25 @@ class Form extends Component {
 }
 
 export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {email: '', password: ''};
+  }
+
   componentWillMount() {
     // this.props.getMainListActions();
   }
 
   setEmail() {
-
+    this.setState({...this.state, email: this.refs.email.value});
   }
 
   setPassword() {
-
+    this.setState({...this.state, password: this.refs.password.value});
   }
 
   logIn() {
-    console.log('log');
+    console.log('log', this.state);
   }
 
   render() {
@@ -50,13 +55,13 @@ export default class App extends Component {
           <div className="col-xs-6"><h2 className="m-t-no">Jogging app</h2></div>
           <div className="col-xs-6 auth-form text-right">
             <div className="form-group display-inline m-r-5">
-              <input type="text" className="form-control" placeholder="Email" onChange={this.setEmail}/>
+              <input type="text" className="form-control" ref="email" placeholder="Email" onChange={this.setEmail.bind(this)}/>
             </div>
             <div className="form-group display-inline m-r-5">
-              <input type="password" className="form-control" placeholder="Password" onChange={this.setPassword}/>
+              <input type="password" className="form-control" ref="password" placeholder="Password" onChange={this.setPassword.bind(this)}/>
             </div>
             <div className="form-group display-inline">
-              <a className="btn btn-sm btn-success" onClick={this.logIn}>Log in</a>
+              <a className="btn btn-sm btn-success" onClick={this.logIn.bind(this)}>Log in</a>
             </div>
           </div>
         </div>

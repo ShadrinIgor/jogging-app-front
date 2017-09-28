@@ -28,7 +28,8 @@
     "redux-form": "^6.0.5",
     "redux-logger": "^2.6.1",
     "redux-state-history": "^0.1.4",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "superagent": "^3.6.0"
   },
   "devDependencies": {
     "babel": "^5.8.20",

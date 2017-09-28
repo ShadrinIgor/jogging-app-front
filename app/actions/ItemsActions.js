@@ -1,5 +1,5 @@
 import {_SUCCESS} from '../constants/baseTypes'
-import {GET_MAIN_LIST} from '../constants/Main'
+import {GET_MAIN_LIST} from '../constants/Items'
 
 let mockApiData = [
     {
