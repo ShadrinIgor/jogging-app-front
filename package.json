@@ -1,0 +1,41 @@
+{
+  "name": "jogging-front",
+  "version": "1.0.0",
+  "description": "-----",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_PATH=$NODE_PATH:./shared node .",
+    "dev": "npm run start & webpack-dev-server --progress --color"
+  },
+  "author": "Shadrin.Igor <shadrin.igor@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.5.4",
+    "express": "^4.13.2",
+    "history": "^1.17.0",
+    "immutable": "^3.7.4",
+    "jquery": "^3.1.0",
+    "object-assign": "^3.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.0.1",
+    "react-router": "^1.0.3",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-form": "^6.0.5",
+    "redux-logger": "^2.6.1",
+    "redux-state-history": "^0.1.4",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.20",
+    "babel-eslint": "^4.0.5",
+    "babel-loader": "^5.3.2",
+    "eslint": "^1.0.0",
+    "eslint-plugin-react": "^3.1.0",
+    "react-hot-loader": "^1.2.8",
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
+  }
+}
