@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {authLogin} from '../actions/AuthActions';
+import {ToastContainer, ToastStore} from 'react-toasts';
 
 class Form extends Component {
   render() {
@@ -31,10 +32,11 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {email: '', password: ''};
+
   }
 
   componentWillMount() {
-    // this.props.getMainListActions();
+    // ToastStore.success("It works !");
   }
 
   setEmail() {
@@ -46,11 +48,15 @@ export default class App extends Component {
   }
 
   logIn() {
-    console.log('log', this.state);
+    if(this.state.email && this.state.password){
+      console.log('log', this.state);
+      this.props.login(this.state.email, this.state.password)
+    }
   }
 
   render() {
     return <div className="container">
+      <ToastContainer store={ToastStore}/>
       <div className="panel panel-default">
         <div className="panel-heading row">
           <div className="col-xs-6"><h2 className="m-t-no">Jogging app</h2></div>
@@ -76,18 +82,11 @@ export default class App extends Component {
 
 export default connect(
   state => ({
-    main_list: state.main,
     auth: state.auth
   }),
   dispatch => ({
-    getMainListActions: (email, password) => {
+    login: (email, password) => {
       dispatch(authLogin(email, password));
     }
-    /*     getContentActions: (menu_id) => {
-     dispatch(getContent(menu_id));
-     },
-     updateCards: (list)=> {
-     dispatch(updateCards(list));
-     }*/
   })
 )(App);

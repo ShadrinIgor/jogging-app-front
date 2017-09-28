@@ -1,19 +1,19 @@
-import {GET_MAIN_LIST,UPDATE_CARDS} from '../constants/Items'
-import {_SUCCESS} from '../constants/baseTypes'
+import {GET_MAIN_LIST, UPDATE_CARDS} from '../constants/Items';
+import {_SUCCESS} from '../constants/baseTypes';
 
 const initialState = {
-    main_list: [],
+  users: []
 };
 
 export default function main(state = initialState, action) {
 
-    switch ( action.type ){
+  switch (action.type) {
 
-        case GET_MAIN_LIST + _SUCCESS :
-            return { ...state, main_list:action.main_list };
+    case GET_MAIN_LIST + _SUCCESS :
+      return {...state, list: action.main_list};
 
-        default :
-            return state
-    }
+    default :
+      return state
+  }
 
 }

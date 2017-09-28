@@ -16,9 +16,6 @@ module.exports = {
     ]
   },
   watch: true,
-  watchOptions: {
-    ignored: /node_modules/
-  },
   plugins: [
     new webpack.DefinePlugin({
       CONFIG: JSON.stringify(config)
