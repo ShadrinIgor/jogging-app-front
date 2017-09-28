@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 export default class App extends Component {
     componentWillMount() {
-        this.props.getMainListActions();
+        // this.props.getMainListActions();
     }
 
     render() {
@@ -13,11 +13,11 @@ export default class App extends Component {
 
 export default connect(
     state => ({
-        main_list: state.main.main_list,
+        main_list: state.main,
         content: state.content
     }),
     dispatch => ({
-        getMainListActions: () => {
+/*        getMainListActions: () => {
             dispatch(getMainList());
         },
         getContentActions: (menu_id) => {
@@ -25,6 +25,6 @@ export default connect(
         },
         updateCards: (list)=> {
             dispatch(updateCards(list));
-        }
+        }*/
     })
 )(App);
