@@ -1,10 +1,9 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 
-import main from './main';
-import content from './content';
-import card from './card';
+import items from './items';
+import users from './users';
 
 export default combineReducers({
-    main,
-    content,
+  items,
+  users
 });

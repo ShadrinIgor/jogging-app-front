@@ -1,56 +1,19 @@
-const path = require('path');
-const webpack = require('webpack');
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = {
-  entry: './app/app.js',
+  entry: "./app/app.js",
   output: {
-    filename: './app.bundle.js',
-    library: 'app'
+    filename: "./app.bundle.js"
   },
+  devtool: '#source-map',
   module: {
-    rules: [
-      {test: /\.html/, use: ['html-loader']},
+    loaders: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env']
-          }
-        }
-      },
-      {test: /\.(pug|jade)$/, loader: 'pug-loader'},
-      {
-        test: /\.sass$/,
-        loaders: 'style-loader!css-loader!sass-loader'
-      },
-      {
-        test: /\.css/,
-        loaders: 'style-loader!css-loader'
-      },
-      {
-        test   : /\.(png|jpg)$/,
-        loader : 'url-loader?limit=8192'
-      },
-      {
-        test   : /\.(ttf|eot|svg|woff|woff2)(\?[a-z0-9]+)?$/,
-        loader : 'file-loader'
+        loader: 'babel',
+        exclude: /node_modules/
       }
     ]
   },
-  plugins: [
-    new ExtractTextPlugin('styles.css'),
-    new webpack.ProvidePlugin({
-      moment: 'moment',
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
-    }),
-  ],
   watch: true,
   watchOptions: {
     ignored: /node_modules/
   }
-};
+}

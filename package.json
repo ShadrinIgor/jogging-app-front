@@ -4,7 +4,7 @@
   "description": "-----",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=$NODE_PATH:./shared node .",
+    "start": "webpack-dev-server --info --inline --progress --hot",
     "dev": "npm run start & webpack-dev-server --progress --color"
   },
   "author": "Shadrin.Igor <shadrin.igor@gmail.com>",
@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.5.4",
     "express": "^4.13.2",
+    "extract-text-webpack-plugin": "^3.0.0",
     "history": "^1.17.0",
     "immutable": "^3.7.4",
     "jquery": "^3.1.0",
