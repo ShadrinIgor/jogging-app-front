@@ -1,7 +1,10 @@
+const webpack = require('webpack');
+const config = require('./app/config');
+
 module.exports = {
-  entry: "./app/app.js",
+  entry: './app/app.js',
   output: {
-    filename: "./app.bundle.js"
+    filename: './app.bundle.js'
   },
   devtool: '#source-map',
   module: {
@@ -15,5 +18,10 @@ module.exports = {
   watch: true,
   watchOptions: {
     ignored: /node_modules/
-  }
-}
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      CONFIG: JSON.stringify(config)
+    })
+  ]
+};

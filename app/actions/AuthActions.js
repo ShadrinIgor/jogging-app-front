@@ -8,7 +8,7 @@ export function authLogin() {
     });
 
     return request
-      .get(`${CONFIG.apiURL}/courses`)
+      .get(`${CONFIG.apiURL}/api`)
       .set({'Authorization': AuthUtil.hasAuthCookie()})
       .ok(response => ActionUtil.processError(dispatch, COURSES_GET_NEW_FAIL, response))
       .end((error, response) => {
