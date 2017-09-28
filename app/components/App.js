@@ -1,38 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {authLogin} from '../actions/AuthActions';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-
-class Form extends Component {
-  render() {
-    return <div className="panel-default col-xs-6 reg-form">
-      <div className="row">
-        <div className="form-group col-xs-6">
-          <input type="email" className="form-control" id="inputEmail" placeholder="First name"/>
-        </div>
-        <div className="form-group col-xs-6">
-          <input type="email" className="form-control" id="inputEmail" placeholder="Surname"/>
-        </div>
-      </div>
-      <div className="form-group">
-        <input type="email" className="form-control" id="email" placeholder="Email"/>
-      </div>
-      <div className="form-group">
-        <input type="password" className="form-control" id="inputPassword" placeholder="Password"/>
-      </div>
-      <div className="form-group">
-        <input type="password" className="form-control" id="inputPassword" placeholder="Repeat password"/>
-      </div>
-      <button className="btn btn-success pull-right">Create an account</button>
-    </div>
-  }
-}
+import {authLogin} from '../actions/AuthActions';
+import RegistrationForm from './RegistrationForm';
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {email: '', password: ''};
-
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -78,7 +53,7 @@ export default class App extends Component {
           </div>
         </div>
       </div>
-      <Form/>
+      <RegistrationForm/>
     </div>
   }
 }
