@@ -1,6 +1,8 @@
 const initialState = {
   name: '',
-  surname: ''
+  surname: '',
+  email: '',
+  password: ''
 };
 
 export default function auth(state = initialState, action) {
