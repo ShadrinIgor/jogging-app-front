@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Control, Errors, Form, actions} from 'react-redux-form';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {createUser} from '../actions/UsersActions';
 import {isEmail} from '../utils/ValidationUtil';
 
 class RegistrationForm extends Component {
+  componentWillUpdate(nextProps, nextState) {
+    if(nextProps.user.status === 'created'){
+      NotificationManager.success('Success', 'Registration');
+    }
+  }
+
   handleSubmit(val) {
     console.log(this.props, val, actions);
     this.props.createUser(val);
@@ -23,6 +30,7 @@ class RegistrationForm extends Component {
                    }
                  }}>
       <div className="panel-default col-xs-6 reg-form">
+        <NotificationContainer/>
         <div className="row">
           <Errors
             model="registrationForm"
@@ -35,6 +43,7 @@ class RegistrationForm extends Component {
               passwordLength: 'Password mast be more 7 literal',
             }}
           />
+
           <div className="form-group col-xs-6">
             <Control.text model=".name" className="form-control" id="inputEmail" placeholder="First name"/>
           </div>
@@ -61,7 +70,7 @@ class RegistrationForm extends Component {
 
 export default connect(
   state => ({
-    auth: state.auth
+    user: state.user
   }),
   dispatch => ({
     createUser: (data) => {

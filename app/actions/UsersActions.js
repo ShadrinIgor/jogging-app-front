@@ -19,7 +19,7 @@ export function createUser(data) {
         }
         else {
           status = _SUCCESS;
-          data = response;
+          data = {user:response, status: 'created'};
         }
 
         dispatch({
