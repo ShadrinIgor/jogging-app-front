@@ -1,34 +1,25 @@
 import React, {Component} from 'react';
 import {Control, Errors, Form} from 'react-redux-form';
+import {createUser} from '../actions/UsersActions';
 import {required,isEmail} from '../utils/ValidationUtil';
 
 class RegistrationForm extends Component {
-  handleSubmit() {
-    console.log('handleSubmit');
+  handleSubmit(val) {
+    console.log(val);
+    createUser(val);
   }
 
   render() {
-    let error = false;
-    const longEnough = (val) => val && val.length > 8;
-    const allFieldRequired = (vals) => {
-      error = true;
-      return vals.name && vals.surname && vals.email && vals.password && vals.confirmPassword;
-    };
+    const longEnough = (val) => val && val.length > 7;
+    const allFieldRequired = (vals) => vals.name && vals.surname && vals.email && vals.password && vals.confirmPassword;
     return <Form model="registrationForm" onSubmit={(val) => this.handleSubmit(val)}
                  validators={{
                    '': {
                      allFieldRequired,
-                     passwordsMatch: (vals) => {
-                       console.log();
-                       return !vals.password || !vals.confirmPassword || vals.password === vals.confirmPassword
-                     },
-                     incorrectEmail: (vals) => {
-                       console.log(vals.email, isEmail(vals.email));
-                       return !vals.email || isEmail(vals.email);
-                     }
-                   },
-                   password: {longEnough},
-                   confirmPassword: {longEnough}
+                     passwordsMatch: (vals) => !vals.password || !vals.confirmPassword || vals.password === vals.confirmPassword,
+                     incorrectEmail: (vals) => !vals.email || isEmail(vals.email),
+                     passwordLength: (vals) => !vals.password || longEnough(vals.password)
+                   }
                  }}>
       <div className="panel-default col-xs-6 reg-form">
         <div className="row">
@@ -39,7 +30,8 @@ class RegistrationForm extends Component {
             messages={{
               passwordsMatch: 'Password and confirm not match',
               allFieldRequired: 'All fields required',
-              incorrectEmail: 'incorrectEmail'
+              incorrectEmail: 'Incorrect email',
+              passwordLength: 'Password mast be more 7 literal',
             }}
           />
           <div className="form-group col-xs-6">

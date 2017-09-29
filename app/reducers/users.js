@@ -1,5 +1,5 @@
-import {GET_MAIN_LIST, UPDATE_CARDS} from '../constants/Items';
-import {_SUCCESS} from '../constants/baseTypes';
+import {CREATE_USER} from '../constants/users';
+import {_SUCCESS,_FAILURE} from '../constants/baseTypes';
 
 const initialState = {
   users: []
@@ -9,9 +9,10 @@ export default function main(state = initialState, action) {
 
   switch (action.type) {
 
-    case GET_MAIN_LIST + _SUCCESS :
-      return {...state, list: action.main_list};
-
+    case CREATE_USER + _SUCCESS :
+      return {...state, data: action.data};
+    case CREATE_USER + _FAILURE :
+      return {...state, error: action.data.error};
     default :
       return state
   }
