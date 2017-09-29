@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
-import {Control, Errors, Form} from 'react-redux-form';
+import {connect} from 'react-redux';
+import {Control, Errors, Form, actions} from 'react-redux-form';
 import {createUser} from '../actions/UsersActions';
-import {required,isEmail} from '../utils/ValidationUtil';
+import {isEmail} from '../utils/ValidationUtil';
 
 class RegistrationForm extends Component {
   handleSubmit(val) {
-    console.log(val);
-    createUser(val);
+    console.log(this.props, val, actions);
+    this.props.createUser(val);
   }
 
   render() {
     const longEnough = (val) => val && val.length > 7;
     const allFieldRequired = (vals) => vals.name && vals.surname && vals.email && vals.password && vals.confirmPassword;
-    return <Form model="registrationForm" onSubmit={(val) => this.handleSubmit(val)}
+    return <Form model="registrationForm" onSubmit={(val) => this.handleSubmit.call(this, val)}
                  validators={{
                    '': {
                      allFieldRequired,
@@ -58,4 +59,14 @@ class RegistrationForm extends Component {
   }
 }
 
-export default RegistrationForm;
+export default connect(
+  state => ({
+    auth: state.auth
+  }),
+  dispatch => ({
+    createUser: (data) => {
+      dispatch(createUser(data));
+    },
+
+  })
+)(RegistrationForm);

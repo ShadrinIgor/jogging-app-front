@@ -4,6 +4,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {Panel} from 'react-bootstrap';
 import {authLogin} from '../actions/AuthActions';
 import RegistrationForm from './RegistrationForm';
+import {createUser} from '../actions/UsersActions';
 
 export default class App extends Component {
   constructor() {
@@ -53,7 +54,7 @@ export default class App extends Component {
           </div>
         </div>
       </div>
-      <RegistrationForm/>
+      <RegistrationForm create-user={this.props.createUser}/>
     </div>
   }
 }
@@ -65,6 +66,6 @@ export default connect(
   dispatch => ({
     login: (email, password) => {
       dispatch(authLogin(email, password));
-    }
+    },
   })
 )(App);

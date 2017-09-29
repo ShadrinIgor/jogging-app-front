@@ -10,19 +10,17 @@ export function createUser(data) {
 
     return request
       .post(`${CONFIG.apiURL}/api/users`, data)
-      //      .set({'Authorization': AuthUtil.hasAuthCookie()})
-      .ok(response => {
-        console.log('res', response);
-      })
       .end((error, response) => {
-        console.log('1', error, response);
         let status = '',
           data = {};
         if (error) {
           status = _FAILURE;
           data.error = response.body.error
         }
-        else status = _SUCCESS;
+        else {
+          status = _SUCCESS;
+          data = response;
+        }
 
         dispatch({
           type: `${CREATE_USER}${status}`,
