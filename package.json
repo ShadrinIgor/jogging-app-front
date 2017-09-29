@@ -19,6 +19,7 @@
     "jquery": "^3.1.0",
     "object-assign": "^3.0.0",
     "react": "^15.5.4",
+    "react-bootstrap": "^0.31.3",
     "react-dom": "^15.3.2",
     "react-notifications": "^1.4.3",
     "react-redux": "^4.0.1",

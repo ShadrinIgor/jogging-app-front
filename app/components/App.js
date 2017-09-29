@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {Panel} from 'react-bootstrap';
 import {authLogin} from '../actions/AuthActions';
 import RegistrationForm from './RegistrationForm';
 
@@ -11,7 +12,6 @@ export default class App extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('componentWillUpdate', nextProps);
     if(nextProps.auth.error){
       NotificationManager.error(nextProps.auth.error, 'Auth error');
     }

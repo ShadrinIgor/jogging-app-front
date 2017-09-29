@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Control, Errors, Form} from 'react-redux-form';
+import {required,isEmail} from '../utils/ValidationUtil';
 
 class RegistrationForm extends Component {
   handleSubmit() {
@@ -20,12 +21,15 @@ class RegistrationForm extends Component {
                      passwordsMatch: (vals) => {
                        console.log();
                        return !vals.password || !vals.confirmPassword || vals.password === vals.confirmPassword
+                     },
+                     incorrectEmail: (vals) => {
+                       console.log(vals.email, isEmail(vals.email));
+                       return !vals.email || isEmail(vals.email);
                      }
                    },
                    password: {longEnough},
                    confirmPassword: {longEnough}
                  }}>
-      <h2>1</h2>
       <div className="panel-default col-xs-6 reg-form">
         <div className="row">
           <Errors
@@ -34,7 +38,8 @@ class RegistrationForm extends Component {
             wrapper={(props) => <div className="errors">{props.children}</div>}
             messages={{
               passwordsMatch: 'Password and confirm not match',
-              allFieldRequired: 'All fields required'
+              allFieldRequired: 'All fields required',
+              incorrectEmail: 'incorrectEmail'
             }}
           />
           <div className="form-group col-xs-6">
@@ -45,7 +50,7 @@ class RegistrationForm extends Component {
           </div>
         </div>
         <div className="form-group">
-          <Control.text type="email" model=".email" className="form-control" id="email" placeholder="Email"/>
+          <Control.text type="text" model=".email" className="form-control" id="email" placeholder="Email"/>
         </div>
         <div className="form-group">
           <Control.text type="password" model=".password" className="form-control" id="password" placeholder="Password"
