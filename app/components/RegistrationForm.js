@@ -6,14 +6,19 @@ import {createUser} from '../actions/UsersActions';
 import {isEmail} from '../utils/ValidationUtil';
 
 class RegistrationForm extends Component {
+
   componentWillUpdate(nextProps, nextState) {
-    if(nextProps.user.status === 'created'){
+    console.log('componentWillUpdate', nextProps, nextState);
+    if(nextProps.users.status === 'created'){
       NotificationManager.success('Success', 'Registration');
+    }
+
+    if(nextProps.users.error){
+      NotificationManager.error(nextProps.users.error, 'Registration');
     }
   }
 
   handleSubmit(val) {
-    console.log(this.props, val, actions);
     this.props.createUser(val);
   }
 
@@ -70,7 +75,7 @@ class RegistrationForm extends Component {
 
 export default connect(
   state => ({
-    user: state.user
+    users: state.users
   }),
   dispatch => ({
     createUser: (data) => {

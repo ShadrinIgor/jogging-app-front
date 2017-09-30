@@ -10,7 +10,7 @@ export default function main(state = initialState, action) {
   switch (action.type) {
 
     case CREATE_USER + _SUCCESS :
-      return {...state, user: action.data.user, status: action.data.status};
+      return {...state, user: action.data.user, status: action.data.status, error: ''};
     case CREATE_USER + _FAILURE :
       return {...state, error: action.data.error};
     default :
