@@ -1,6 +1,6 @@
 import request from 'superagent';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {AUTH_LOGIN} from '../constants/Auth';
+import {AUTH_LOGIN, SET_LOCAL_STORE} from '../constants/Auth';
 
 export function authLogin(email, password) {
   return dispatch => {
@@ -10,20 +10,18 @@ export function authLogin(email, password) {
 
     return request
       .post(`${CONFIG.apiURL}/api/auth`, {email, password})
-      //.set({email, password})
       //      .set({'Authorization': AuthUtil.hasAuthCookie()})
-      .ok(response => {
-        console.log('res', response);
-      }) // ActionUtil.processError(dispatch, COURSES_GET_NEW_FAIL, response
       .end((error, response) => {
-        console.log('1', error, response);
         let status = '',
           data = {};
         if (error) {
           status = _FAILURE;
           data.error = response.body.error
         }
-        else status = _SUCCESS;
+        else {
+          status = _SUCCESS;
+          data = response.body;
+        }
 
         dispatch({
           type: `${AUTH_LOGIN}${status}`,
@@ -32,4 +30,14 @@ export function authLogin(email, password) {
       })
   };
 }
+
+export function setLocalStore(data) {
+  return dispatch => {
+    dispatch({
+      type: SET_LOCAL_STORE,
+      data
+    });
+  }
+}
+
 
