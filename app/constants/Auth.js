@@ -1,3 +1,3 @@
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
-export const SET_LOCAL_STORE = 'SET_LOCAL_STORE';
+export const LOG_OUT = 'LOG_OUT';

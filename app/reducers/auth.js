@@ -1,5 +1,5 @@
 import {setLocalStoreData} from '../utils/AuthUtil';
-import {AUTH_LOGIN, SET_LOCAL_STORE} from '../constants/Auth';
+import {AUTH_LOGIN, SET_LOCAL_STORE, LOG_OUT} from '../constants/Auth';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
 
 const initialState = {};
@@ -13,10 +13,8 @@ export default function auth(state = initialState, action) {
     case `${AUTH_LOGIN}${_FAILURE}` :
       return {...state, error: action.data.error, login: false};
 
-/*    case SET_LOCAL_STORE :
-      console.log('data', action.data);
-      localStorage.setItem('state', 'off');
-      return {...state, auth: true, user: action.data};*/
+    case LOG_OUT :
+      return {...state, auth: false, user: null};
 
     default :
       return state

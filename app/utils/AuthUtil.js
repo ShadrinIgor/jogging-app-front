@@ -4,7 +4,6 @@ const TOKEN_KEY = 'JAPP_TOKEN';
 const USER_KEY = 'JAPP_USER';
 
 export const setLocalStoreData = (data) => {
-  console.log('data', data.token, data.user.email, data.user.id);
   localStorage.setItem(TOKEN_KEY, data.token);
   localStorage.setItem(USER_KEY, JSON.stringify(data.user));
 };
@@ -15,4 +14,8 @@ export const getLocalStoreData = () => {
   return {token, user}
 };
 
-
+export const clearLocalStoreData = () => {
+  const token = localStorage.removeItem(TOKEN_KEY);
+  const user = localStorage.removeItem(USER_KEY);
+  return true;
+};
