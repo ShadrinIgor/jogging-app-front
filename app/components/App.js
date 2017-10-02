@@ -68,7 +68,7 @@ export default class App extends Component {
     }
   }
 
-  logOut() {
+  logOutAction() {
     console.log('Удаляем');
     this.setState({...this.state, localStore: {}});
     clearLocalStoreData();
@@ -83,7 +83,7 @@ export default class App extends Component {
           <div className="col-xs-6"><h2 className="m-t-no">Jogging app</h2></div>
           <div className="col-xs-6 auth-form text-right">
             {!this.state.localStore.token && <Login login={this.props.login.bind(this)}/>}
-            {this.state.localStore.token && <Logout logOut={this.logOut.bind(this)}/>}
+            {this.state.localStore.token && <Logout logOut={this.logOutAction.bind(this)}/>}
           </div>
         </div>
       </div>

@@ -32,8 +32,10 @@ export function authLogin(email, password) {
 }
 
 export function logOut() {
+  console.log('logOut');
   return dispatch => {
-    dispatch({
+    console.log('logOut2');
+    return dispatch({
       type: LOG_OUT
     });
   }
