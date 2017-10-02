@@ -5,7 +5,6 @@ import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
 const initialState = {};
 
 export default function auth(state = initialState, action) {
-  console.log('type', action.type);
   switch (action.type) {
     case `${AUTH_LOGIN}${_SUCCESS}` :
       setLocalStoreData(action.data);

@@ -4,7 +4,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {authLogin, logOut} from '../actions/AuthActions';
 import RegistrationForm from './RegistrationForm';
 import {getLocalStoreData, clearLocalStoreData} from '../utils/AuthUtil';
-import {LOG_OUT} from '../constants/Auth';
+import {Link} from 'react-router-dom';
 
 class Logout extends Component {
   render() {
@@ -78,7 +78,7 @@ export default class App extends Component {
   }
 
   render() {
-    return <div className="container">
+    return <div>
       <NotificationContainer/>
       <div className="panel panel-default">
         <div className="panel-heading row">
@@ -89,6 +89,8 @@ export default class App extends Component {
           </div>
         </div>
       </div>
+      <Link to="/">Home</Link>
+      <Link to="/cabinet">cabinet</Link>
       -{this.state.localStore.token}-
       <RegistrationForm create-user={this.props.createUser}/>
     </div>

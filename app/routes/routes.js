@@ -1,44 +1,48 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {Redirect, Route, Switch} from "react-router-dom";
 //import AuthUtil from '../utils/AuthUtil';
 //import * as authActions from '../actions/auth';
-import {Redirect, Route, Switch} from 'react-router-dom';
 
 import appRoute from '../components/App';
+import cabinetRoute from '../components/Cabinet';
+import notFoundRoute from '../components/NotFound';
 
 class Routes extends Component {
 
-/*  componentWillMount() {
-    const {userActions} = this.props;
+  /*  componentWillMount() {
+   const {userActions} = this.props;
 
-    if (AuthUtil.hasAuthCookie()) {
-      userActions.retrieveInformationAboutUser();
-    }
-  }
+   if (AuthUtil.hasAuthCookie()) {
+   userActions.retrieveInformationAboutUser();
+   }
+   }
 
-  shouldComponentUpdate_(nextProps) {
-    const {user} = this.props;
+   shouldComponentUpdate_(nextProps) {
+   const {user} = this.props;
 
-    console.log(user.registrationStep, nextProps.user.registrationStep);
+   console.log(user.registrationStep, nextProps.user.registrationStep);
 
-    return user.registrationStep !== nextProps.user.registrationStep
-  }*/
+   return user.registrationStep !== nextProps.user.registrationStep
+   }*/
 
   render() {
     return (
-      <Switch>
-        <Route exact path='/' component={appRoute}/>
-      </Switch>
+      <div className="container">
+        <Switch>
+          <Route exact path='/' component={appRoute}/>
+          <Route exact path='/cabinet' component={cabinetRoute}/>
+          <Route component={notFoundRoute}/>
+        </Switch>
+      </div>
     )
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-  }
+  return {}
 }
 
 function mapStateToProps(state) {
