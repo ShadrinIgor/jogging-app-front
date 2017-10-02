@@ -1,13 +1,9 @@
 import request from 'superagent';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {AUTH_LOGIN, SET_LOCAL_STORE, LOG_OUT} from '../constants/Auth';
+import {AUTH_LOGIN, LOG_OUT} from '../constants/Auth';
 
 export function authLogin(email, password) {
   return dispatch => {
-    dispatch({
-      type: AUTH_LOGIN
-    });
-
     return request
       .post(`${CONFIG.apiURL}/api/auth`, {email, password})
       //      .set({'Authorization': AuthUtil.hasAuthCookie()})
@@ -35,8 +31,8 @@ export function logOut() {
   console.log('logOut');
   return dispatch => {
     console.log('logOut2');
-    return dispatch({
-      type: LOG_OUT
+    dispatch({
+      type: `${LOG_OUT}${_SUCCESS}`
     });
   }
 }

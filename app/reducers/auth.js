@@ -14,7 +14,7 @@ export default function auth(state = initialState, action) {
     case `${AUTH_LOGIN}${_FAILURE}` :
       return {error: action.data.error, login: false};
 
-    case LOG_OUT :
+    case `${LOG_OUT}${_SUCCESS}` :
       return {login: false};
 
     default :

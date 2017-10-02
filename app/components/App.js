@@ -4,6 +4,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {authLogin, logOut} from '../actions/AuthActions';
 import RegistrationForm from './RegistrationForm';
 import {getLocalStoreData, clearLocalStoreData} from '../utils/AuthUtil';
+import {LOG_OUT} from '../constants/Auth';
 
 class Logout extends Component {
   render() {
@@ -72,7 +73,8 @@ export default class App extends Component {
     console.log('Удаляем');
     this.setState({...this.state, localStore: {}});
     clearLocalStoreData();
-    logOut();
+    this.props.logOut();
+    console.log('Удаляем2');
   }
 
   render() {
@@ -100,6 +102,9 @@ export default connect(
   dispatch => ({
     login: (email, password) => {
       dispatch(authLogin(email, password));
+    },
+    logOut: () => {
+      dispatch(logOut());
     }
   })
 )(App);
