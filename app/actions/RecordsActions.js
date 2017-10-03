@@ -1,12 +1,13 @@
 import request from 'superagent';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
 import {GET_LIST} from '../constants/records';
+import {getJWT} from '../utils/AuthUtil';
 
 export function getList() {
   return dispatch => {
     return request
       .get(`${CONFIG.apiURL}/api/records`)
-      //      .set({'Authorization': AuthUtil.hasAuthCookie()})
+      .set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',
           data = {};
