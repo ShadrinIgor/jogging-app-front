@@ -6,7 +6,7 @@ import {Route, Switch} from 'react-router-dom';
 import {getLocalStoreData, isAuth} from '../utils/AuthUtil';
 import RegistrationForm from '../components/RegistrationForm';
 import Header from '../components/Header';
-import Cabinet from '../components/Cabinet';
+import Records from '../components/Records';
 import notFoundRoute from '../components/NotFound';
 import Menu from '../components/Menu';
 import {setAuth} from '../actions/AuthActions';
@@ -43,9 +43,9 @@ class Routes extends Component {
         <Menu />
         <Switch>
           <Route exact path='/' render={props => (
-            isAuth() ? <Cabinet /> : <RegistrationForm />
+            isAuth() ? <Records /> : <RegistrationForm />
           )}/>
-          <Route exact path='/cabinet' component={Cabinet}/>
+          <Route exact path='/records' component={Records}/>
           <Route component={notFoundRoute}/>
         </Switch>
       </div>

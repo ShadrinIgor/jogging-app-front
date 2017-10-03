@@ -77,7 +77,6 @@ class Registration extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log(this.props, nextProps);
     if (!this.props.users.status && nextProps.users.status === 'created') {
       this.setState({...this.state, isRegister: true});
       NotificationManager.success('Success', 'Registration');
