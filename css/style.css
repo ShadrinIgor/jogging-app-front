@@ -22,6 +22,9 @@
     margin-right: 5px;
 }
 
+.m-b-10{
+    margin-bottom: 10px;
+}
 .errors {
     color: #ff0000;
     border: 1px solid #ff0000;

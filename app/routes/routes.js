@@ -8,6 +8,7 @@ import RegistrationForm from '../components/RegistrationForm';
 import Header from '../components/Header';
 import Cabinet from '../components/Cabinet';
 import notFoundRoute from '../components/NotFound';
+import Menu from '../components/Menu';
 import {setAuth} from '../actions/AuthActions';
 
 class Routes extends Component {
@@ -39,6 +40,7 @@ class Routes extends Component {
     return (
       <div className="container">
         <Header />
+        <Menu />
         <Switch>
           <Route exact path='/' render={props => (
             isAuth() ? <Cabinet /> : <RegistrationForm />
