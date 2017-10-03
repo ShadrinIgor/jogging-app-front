@@ -2,15 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {authLogin, logOut} from '../actions/AuthActions';
-import RegistrationForm from './RegistrationForm';
-import {getLocalStoreData, clearLocalStoreData} from '../utils/AuthUtil';
-import {Link} from 'react-router-dom';
+import {clearLocalStoreData, getLocalStoreData} from '../utils/AuthUtil';
 
 class Logout extends Component {
   render() {
     return <div className="form-group display-inline">
-        <a className="btn btn-sm btn-success" onClick={this.props.logOut}>Log out</a>
-      </div>
+      <a className="btn btn-sm btn-success" onClick={this.props.logOut}>Log out</a>
+    </div>
   }
 }
 
@@ -51,7 +49,7 @@ class Login extends Component {
   }
 }
 
-export default class App extends Component {
+class Header extends Component {
   constructor() {
     super();
     this.state = {localStore: getLocalStoreData()};
@@ -62,19 +60,15 @@ export default class App extends Component {
       NotificationManager.error(nextProps.auth.error, 'Auth error');
     }
 
-    console.log(nextProps.auth.login, !this.props.auth.login);
     if (nextProps.auth.login && !this.props.auth.login) {
-      console.log('ОБновл');
       this.setState({...this.state, localStore: getLocalStoreData()});
     }
   }
 
   logOutAction() {
-    console.log('Удаляем');
     this.setState({...this.state, localStore: {}});
     clearLocalStoreData();
     this.props.logOut();
-    console.log('Удаляем2');
   }
 
   render() {
@@ -89,10 +83,6 @@ export default class App extends Component {
           </div>
         </div>
       </div>
-      <Link to="/">Home</Link>
-      <Link to="/cabinet">cabinet</Link>
-      -{this.state.localStore.token}-
-      <RegistrationForm create-user={this.props.createUser}/>
     </div>
   }
 }
@@ -109,4 +99,4 @@ export default connect(
       dispatch(logOut());
     }
   })
-)(App);
+)(Header);

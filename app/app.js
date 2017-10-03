@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import {BrowserRouter, Route} from "react-router-dom";
 import Routes from './routes/routes';
+import Header from './components/Header';
 
 const supportsHistory = 'pushState' in window.history;
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
@@ -21,13 +22,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
-
-/*
- <Provider store={store}>
- <I18nextProvider i18n={i18n}>
- <BrowserRouter history={!supportsHistory}>
- <Route component={Routes}/>
- </BrowserRouter>
- </I18nextProvider>
- </Provider>,
- */

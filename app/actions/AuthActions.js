@@ -1,6 +1,6 @@
 import request from 'superagent';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {AUTH_LOGIN, LOG_OUT} from '../constants/Auth';
+import {AUTH_LOGIN, LOG_OUT, SET_AUTH} from '../constants/Auth';
 
 export function authLogin(email, password) {
   return dispatch => {
@@ -35,4 +35,12 @@ export function logOut() {
   }
 }
 
+export function setAuth(data) {
+  return dispatch => {
+    dispatch({
+      type: `${SET_AUTH}${_SUCCESS}`,
+      data
+    });
+  }
+}
 

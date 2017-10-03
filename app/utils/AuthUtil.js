@@ -15,7 +15,14 @@ export const getLocalStoreData = () => {
 };
 
 export const clearLocalStoreData = () => {
+  console.log('Удаляю');
   const token = localStorage.removeItem(TOKEN_KEY);
   const user = localStorage.removeItem(USER_KEY);
   return true;
+};
+
+export const isAuth = () => {
+  const token = localStorage.getItem(TOKEN_KEY);
+  const user = localStorage.getItem(USER_KEY);
+  return !!token && !!user;
 };
