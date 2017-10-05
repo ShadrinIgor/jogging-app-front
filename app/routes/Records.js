@@ -1,18 +1,34 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button, Panel, Table} from 'react-bootstrap';
+import {Panel, Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 import {getList} from '../actions/RecordsActions';
 
 class Records extends Component {
+
+  constructor() {
+    super();
+    this.state = {list: []};
+  }
 
   componentWillMount() {
     this.props.getList();
   }
 
+  getSpeed(distance, time) {
+    let speed = 0;
+    const newDistance = (distance / 1000),
+      newTime = (time / 60);
+
+    if (distance && time) {
+      speed = (newDistance / newTime).toFixed(2);
+    }
+    return speed;
+  }
+
   render() {
     const {records} = this.props;
-    console.log('records', records);
     return <Panel header="Records" bsStyle="success">
       <Table striped bordered condensed hover>
         <thead>
@@ -27,15 +43,15 @@ class Records extends Component {
         <tbody>
         {
           records.items && records.items.map(item => {
-            (
-              <tr>
-                <td>{item.id}</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            return (
+              <tr key={item._id}>
+                <td>{moment(item.date).format('ll')}</td>
+                <td>{item.distance}</td>
+                <td>{item.time}</td>
+                <td>{this.getSpeed(item.distance, item.time)}</td>
                 <td className="text-center">
-                  <a className="glyphicon glyphicon-pencil m-r-5" aria-hidden="true"></a>
-                  <a className="glyphicon glyphicon-trash" aria-hidden="true"></a>
+                  <Link className="glyphicon glyphicon-pencil m-r-5" to={`/recordForm/${item._id}`} />
+                  <Link className="glyphicon glyphicon-trash" to={`/recordForm/${item._id}`} />
                 </td>
               </tr>
             )

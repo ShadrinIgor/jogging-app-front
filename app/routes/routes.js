@@ -32,6 +32,7 @@ class Routes extends Component {
           )}/>
           <Route exact path='/records' component={Records}/>
           <Route exact path='/recordForm' component={RecordForm}/>
+          <Route exact path='/recordForm/:id' component={RecordForm}/>
           <Route component={notFoundRoute}/>
         </Switch>
       </div>

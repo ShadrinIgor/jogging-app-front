@@ -18,7 +18,6 @@ export const getLocalStoreData = () => {
 };
 
 export const clearLocalStoreData = () => {
-  console.log('Удаляю');
   const token = localStorage.removeItem(TOKEN_KEY);
   const user = localStorage.removeItem(USER_KEY);
   jwt = '';

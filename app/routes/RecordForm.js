@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Control, Errors, Form} from 'react-redux-form';
+import {Redirect} from 'react-router-dom';
 import {Panel} from 'react-bootstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {_SUCCESS} from '../constants/baseTypes';
-import {save} from '../actions/RecordsActions';
+import {save, getRecord} from '../actions/RecordsActions';
 import FieldError from '../components/FieldError';
 
 class RecordForm extends Component {
@@ -65,25 +66,29 @@ class FormSuccess extends Component {
 class RForm extends Component {
   constructor() {
     super();
-    this.state = {isAdded: false};
+    this.state = {saved: false};
+  }
+
+  componentWillMount() {
+    if(this.props.match.params.id){
+      this.props.getRecord(this.props.match.params.id);
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
     if (!this.props.recordForm.status && nextProps.recordForm.status === _SUCCESS) {
-      this.setState({...this.state, isRegister: true});
-      NotificationManager.success('Success save', 'Form');
+      this.setState({...this.state, saved: true});
+      NotificationManager.success('Record success save', 'Form');
     }
-/*    if (!Object.keys(this.props.recordForm.errors).length && Object.keys(nextProps.recordForm.errors).length) {
-      Object.keys(nextProps.recordForm.errors).map(item => {
-        NotificationManager.error(nextProps.recordForm.errors[item], 'Form');
-      });
-    }*/
+    if (!Object.keys(this.props.recordForm.errors).length && Object.keys(nextProps.recordForm.errors).length) {
+      NotificationManager.error('Form filling error', 'Form');
+    }
   }
 
   render() {
     return <div className="panel-default col-xs-6 reg-form">
-      {this.state.isAdded && <FormSuccess />}
-      {!this.state.isAdded && <RecordForm errors={this.props.recordForm.errors} save={this.props.saveItem.bind()}/>}
+      {this.state.saved && <Redirect to="/"/>}
+      {!this.state.saved && <RecordForm errors={this.props.recordForm.errors} save={this.props.saveItem.bind()}/>}
     </div>
   }
 }
@@ -96,6 +101,9 @@ export default connect(
   dispatch => ({
     saveItem: (data) => {
       dispatch(save(data));
+    },
+    getRecord: (id) => {
+      dispatch(getRecord(id));
     }
   })
 )(RForm);

@@ -1,6 +1,7 @@
 import request from 'superagent';
+import moment from 'moment';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {GET_LIST, SAVE_RECORD} from '../constants/records';
+import {GET_LIST, SAVE_RECORD, GET_RECORD} from '../constants/records';
 import {getJWT} from '../utils/AuthUtil';
 
 export function save(data) {
@@ -24,7 +25,6 @@ export function save(data) {
           status = _SUCCESS;
         }
 
-        console.log(`${SAVE_RECORD}${status}`, data);
         dispatch({
           type: `${SAVE_RECORD}${status}`,
           data
@@ -58,20 +58,29 @@ export function getList() {
   };
 }
 
-/*export function logOut() {
- return dispatch => {
- dispatch({
- type: `${LOG_OUT}${_SUCCESS}`
- });
- }
- }
+export function getRecord(id) {
+  return dispatch => {
+    return request
+      .get(`${CONFIG.apiURL}/api/records/${id}`)
+      .set({'Authorization': getJWT()})
+      .end((error, response) => {
+        let status = '',
+          data = {};
 
- export function setAuth(data) {
- return dispatch => {
- dispatch({
- type: `${SET_AUTH}${_SUCCESS}`,
- data
- });
- }
- }*/
+        if (error) {
+          status = _FAILURE;
+          data.error = response.body.error
+        }
+        else {
+          status = _SUCCESS;
+          data.fields = response.body.data;
+          data.fields.date = moment(data.fields.date).format("DD.MM.YYYY");
+        }
 
+        dispatch({
+          type: `${GET_RECORD}${status}`,
+          data
+        });
+      })
+  };
+}
