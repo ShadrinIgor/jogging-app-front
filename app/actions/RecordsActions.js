@@ -5,11 +5,10 @@ import {GET_LIST, SAVE_RECORD, GET_RECORD} from '../constants/records';
 import {getJWT} from '../utils/AuthUtil';
 
 export function save(data) {
-  const method = data.id ? 'PUT' : 'POST';
+  console.log('save', data);
   return dispatch => {
-    return request
-      .post(`${CONFIG.apiURL}/api/records`, data)
-      .set({'Authorization': getJWT()})
+    let obj = data._id ? request.put(`${CONFIG.apiURL}/api/records`, data) : request.post(`${CONFIG.apiURL}/api/records`, data);
+    return obj.set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',
           data = {};
@@ -75,6 +74,7 @@ export function getRecord(id) {
           status = _SUCCESS;
           data.fields = response.body.data;
           data.fields.date = moment(data.fields.date).format("DD.MM.YYYY");
+          console.log('data', data);
         }
 
         dispatch({

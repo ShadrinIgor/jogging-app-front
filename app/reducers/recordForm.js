@@ -2,7 +2,7 @@ import {SAVE_RECORD, GET_RECORD} from '../constants/records';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
 
 const initialState = {
-  id: '',
+  _id: '',
   date: '',
   distance: '',
   time: '',
@@ -20,7 +20,6 @@ export default (state = initialState, action) => {
       return {...state, errors: action.data.errors, status: 'error'};
 
     case `${GET_RECORD}${_SUCCESS}` :
-      console.log('GET_RECORD', action);
       return {...initialState, ...action.data.fields};
 
     case `${GET_RECORD}${_FAILURE}` :
