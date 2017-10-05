@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Panel, Table} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import {getList} from '../actions/RecordsActions';
 
 class Records extends Component {
@@ -11,6 +12,7 @@ class Records extends Component {
 
   render() {
     const {records} = this.props;
+    console.log('records', records);
     return <Panel header="Records" bsStyle="success">
       <Table striped bordered condensed hover>
         <thead>
@@ -24,7 +26,7 @@ class Records extends Component {
         </thead>
         <tbody>
         {
-          records.list.map(item => {
+          records.items && records.items.map(item => {
             (
               <tr>
                 <td>{item.id}</td>
@@ -40,14 +42,14 @@ class Records extends Component {
           })
         }
         {
-          !records.list.length && <tr>
+          (!records.items || !records.items.length) && <tr>
             <td colSpan="5" className="text-center"><p>No have items</p></td>
           </tr>
         }
         </tbody>
       </Table>
       <div className="pull-right">
-        <Button className="btn btn-success">Add new record</Button>
+        <Link className="btn btn-success" to="/recordForm">Add new record</Link>
       </div>
     </Panel>
   }

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
 import {getLocalStoreData, isAuth} from '../utils/AuthUtil';
 import RegistrationForm from '../components/RegistrationForm';
+import RecordForm from '../components/RecordForm';
 import Header from '../components/Header';
 import Records from '../components/Records';
 import notFoundRoute from '../components/NotFound';
@@ -12,22 +13,6 @@ import Menu from '../components/Menu';
 import {setAuth} from '../actions/AuthActions';
 
 class Routes extends Component {
-
-  /*  componentWillMount() {
-   const {userActions} = this.props;
-
-   if (AuthUtil.hasAuthCookie()) {
-   userActions.retrieveInformationAboutUser();
-   }
-   }
-
-   shouldComponentUpdate_(nextProps) {
-   const {user} = this.props;
-
-   console.log(user.registrationStep, nextProps.user.registrationStep);
-
-   return user.registrationStep !== nextProps.user.registrationStep
-   }*/
 
   componentWillMount(){
     if(isAuth() && !this.props.auth.login){
@@ -46,12 +31,11 @@ class Routes extends Component {
             isAuth() ? <Records /> : <RegistrationForm />
           )}/>
           <Route exact path='/records' component={Records}/>
+          <Route exact path='/recordForm' component={RecordForm}/>
           <Route component={notFoundRoute}/>
         </Switch>
       </div>
     )
-    /*      <Link to="/">Home</Link>
-     <Link to="/cabinet">cabinet</Link>*/
   }
 }
 

@@ -6,12 +6,12 @@ import records from './records';
 import users from './users';
 import auth from './auth';
 import registrationForm from './registrationForm';
-
-const initialUser = { registration: '' };
+import recordForm from './recordForm';
 
 export default combineForms({
   records,
   users,
   auth,
-  registrationForm
+  registrationForm,
+  recordForm
 });

@@ -6,7 +6,7 @@ const initialState = {list:[]};
 export default function auth(state = initialState, action) {
   switch (action.type) {
     case `${GET_LIST}${_SUCCESS}` :
-      return {list: action.data.list};
+      return {list: action.data.data.items};
 
     case `${GET_LIST}${_FAILURE}` :
       return {error: action.data.error, list: []};
