@@ -1,30 +1,31 @@
-.display-inline{
+.display-inline {
     display: inline-block;
     vertical-align: top;
 }
 
-.auth-form .display-inline input{
+.auth-form .display-inline input {
     height: 30px;
 }
 
-.m-t-no{
+.m-t-no {
     margin-top: 0;
 }
 
-.reg-form{
+.reg-form {
     left: 50%;
     width: 500px;
     margin-left: -250px;
     margin-top: 50px;
 }
 
-.m-r-5{
+.m-r-5 {
     margin-right: 5px;
 }
 
-.m-b-10{
+.m-b-10 {
     margin-bottom: 10px;
 }
+
 .errors {
     color: #ff0000;
     border: 1px solid #ff0000;
@@ -36,4 +37,8 @@
 .errors span {
     display: block;
     width: 100%;
+}
+
+.field-errors {
+    color: #ff0000;
 }

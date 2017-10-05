@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {Control, Errors, Form} from 'react-redux-form';
 import {Panel} from 'react-bootstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {_SUCCESS} from '../constants/baseTypes';
 import {save} from '../actions/RecordsActions';
+import FieldError from '../components/FieldError';
 
 class RecordForm extends Component {
   handleSubmit(data) {
@@ -12,9 +14,9 @@ class RecordForm extends Component {
 
   render() {
     const allFieldRequired = vals => {
-      console.log('vals', vals);
       return vals.date && vals.distance && vals.time
     };
+    const {errors} = this.props;
     return <Form model="recordForm" onSubmit={(val) => this.handleSubmit.call(this, val)}
                  validators={{
                    '': {
@@ -37,12 +39,15 @@ class RecordForm extends Component {
       </div>
       <div className="form-group">
         <Control.text type="text" model=".date" className="form-control" id="date" placeholder="Date"/>
+        <FieldError errors={errors.date} />
       </div>
       <div className="form-group">
         <Control.text type="text" model=".distance" className="form-control" id="distance" placeholder="Distance"/>
+        <FieldError errors={errors.distance} />
       </div>
       <div className="form-group">
         <Control.text type="text" model=".time" className="form-control" id="time" placeholder="Time"/>
+        <FieldError errors={errors.time} />
       </div>
       <button type="submit" className="btn btn-success pull-right">Create</button>
     </Form>
@@ -64,19 +69,21 @@ class RForm extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (!this.props.recordForm.status && nextProps.recordForm.status === 'save') {
+    if (!this.props.recordForm.status && nextProps.recordForm.status === _SUCCESS) {
       this.setState({...this.state, isRegister: true});
       NotificationManager.success('Success save', 'Form');
     }
-    if (!this.props.recordForm.error && nextProps.recordForm.error) {
-      NotificationManager.error(nextProps.recordForm.error, 'Form');
-    }
+/*    if (!Object.keys(this.props.recordForm.errors).length && Object.keys(nextProps.recordForm.errors).length) {
+      Object.keys(nextProps.recordForm.errors).map(item => {
+        NotificationManager.error(nextProps.recordForm.errors[item], 'Form');
+      });
+    }*/
   }
 
   render() {
     return <div className="panel-default col-xs-6 reg-form">
       {this.state.isAdded && <FormSuccess />}
-      {!this.state.isAdded && <RecordForm save={this.props.saveItem.bind()}/>}
+      {!this.state.isAdded && <RecordForm errors={this.props.recordForm.errors} save={this.props.saveItem.bind()}/>}
     </div>
   }
 }

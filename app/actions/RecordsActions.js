@@ -1,6 +1,6 @@
 import request from 'superagent';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {GET_LIST, ADD_RECORD, EDIT_RECORD} from '../constants/records';
+import {GET_LIST, SAVE_RECORD} from '../constants/records';
 import {getJWT} from '../utils/AuthUtil';
 
 export function save(data) {
@@ -14,15 +14,19 @@ export function save(data) {
           data = {};
         if (error) {
           status = _FAILURE;
-          data.error = response.body.error
+          data.errors = {};
+          Object.keys(response.body.error.errors).map(item => {
+            const error = response.body.error.errors[item];
+            data.errors[error.path] = error.message;
+          });
         }
         else {
           status = _SUCCESS;
-          data = response.body;
         }
 
+        console.log(`${SAVE_RECORD}${status}`, data);
         dispatch({
-          type: `${GET_LIST}${status}`,
+          type: `${SAVE_RECORD}${status}`,
           data
         });
       })
@@ -55,19 +59,19 @@ export function getList() {
 }
 
 /*export function logOut() {
-  return dispatch => {
-    dispatch({
-      type: `${LOG_OUT}${_SUCCESS}`
-    });
-  }
-}
+ return dispatch => {
+ dispatch({
+ type: `${LOG_OUT}${_SUCCESS}`
+ });
+ }
+ }
 
-export function setAuth(data) {
-  return dispatch => {
-    dispatch({
-      type: `${SET_AUTH}${_SUCCESS}`,
-      data
-    });
-  }
-}*/
+ export function setAuth(data) {
+ return dispatch => {
+ dispatch({
+ type: `${SET_AUTH}${_SUCCESS}`,
+ data
+ });
+ }
+ }*/
 
