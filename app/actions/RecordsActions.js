@@ -1,7 +1,7 @@
 import request from 'superagent';
 import moment from 'moment';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {GET_LIST, SAVE_RECORD, GET_RECORD} from '../constants/records';
+import {GET_LIST, SAVE_RECORD, GET_RECORD, DELETE_RECORD} from '../constants/records';
 import {getJWT} from '../utils/AuthUtil';
 
 export function save(data) {
@@ -79,6 +79,33 @@ export function getRecord(id) {
 
         dispatch({
           type: `${GET_RECORD}${status}`,
+          data
+        });
+      })
+  };
+}
+
+export function deleteItem(id) {
+  return dispatch => {
+    return request.delete(`${CONFIG.apiURL}/api/records/${id}`)
+      .set({'Authorization': getJWT()})
+      .end((error, response) => {
+        let status = '',
+          data = {};
+        if (error) {
+          status = _FAILURE;
+          data.errors = {};
+          Object.keys(response.body.error.errors).map(item => {
+            const error = response.body.error.errors[item];
+            data.errors[error.path] = error.message;
+          });
+        }
+        else {
+          status = _SUCCESS;
+        }
+
+        dispatch({
+          type: `${DELETE_RECORD}${status}`,
           data
         });
       })

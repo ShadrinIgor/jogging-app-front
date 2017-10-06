@@ -10,8 +10,9 @@ export default class FieldError extends Component {
         }
         {
           Array.isArray(errors) && errors.map(item => {
+            const key = Math.random();
             return (
-              <span>{item}</span>
+              <span key={key}>{item}</span>
             )
           })
         }

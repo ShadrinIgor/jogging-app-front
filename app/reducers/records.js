@@ -1,7 +1,7 @@
-import {GET_LIST} from '../constants/records';
+import {GET_LIST, DELETE_RECORD} from '../constants/records';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
 
-const initialState = {list:[]};
+const initialState = {list:[], status: ''};
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
@@ -10,6 +10,12 @@ export default function auth(state = initialState, action) {
 
     case `${GET_LIST}${_FAILURE}` :
       return {error: action.data.error};
+
+    case `${DELETE_RECORD}${_SUCCESS}` :
+      return {items: action.data.data.items, status: 'deleted'};
+
+    case `${DELETE_RECORD}${_FAILURE}` :
+      return {...state, error: action.data.error, status: 'error_delete'};
 
     default :
       return state

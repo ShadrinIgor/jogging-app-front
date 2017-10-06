@@ -42,3 +42,11 @@
 .field-errors {
     color: #ff0000;
 }
+
+.DayPickerInput {
+    display: block !important;
+}
+
+.DayPickerInput input[readonly] {
+    background: #fff !important;
+}
