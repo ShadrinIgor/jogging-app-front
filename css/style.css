@@ -11,6 +11,12 @@
     margin-top: 0;
 }
 
+.center-form {
+    left: 50%;
+    width: 500px;
+    margin-left: -250px;
+}
+
 .reg-form {
     left: 50%;
     width: 500px;
@@ -49,4 +55,8 @@
 
 .DayPickerInput input[readonly] {
     background: #fff !important;
+}
+
+.panel-success>.panel-heading {
+    font-size: 20px;
 }

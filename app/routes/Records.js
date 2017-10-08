@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Panel, Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
-import {getList} from '../actions/RecordsActions';
+import {getList, deleteItem} from '../actions/RecordsActions';
 
 class Records extends Component {
 
@@ -25,6 +25,12 @@ class Records extends Component {
       speed = (newDistance / newTime).toFixed(2);
     }
     return speed;
+  }
+
+  deleteRecord(id) {
+    if (confirm('Do you wont delete record?')) {
+      deleteItem(id);
+    }
   }
 
   render() {
@@ -51,7 +57,7 @@ class Records extends Component {
                 <td>{this.getSpeed(item.distance, item.time)}</td>
                 <td className="text-center">
                   <Link className="glyphicon glyphicon-pencil m-r-5" to={`/recordForm/${item._id}`} />
-                  <Link className="glyphicon glyphicon-trash" to={`/recordForm/${item._id}`} />
+                  <a className="glyphicon glyphicon-trash" onClick={this.deleteRecord.bind(this)} />
                 </td>
               </tr>
             )
@@ -78,6 +84,9 @@ export default connect(
   dispatch => ({
     getList: () => {
       dispatch(getList());
+    },
+    deleteItem: () => {
+      dispatch(deleteItem());
     }
   })
 )(Records);
