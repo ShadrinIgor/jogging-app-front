@@ -1,12 +1,12 @@
 import request from 'superagent';
 import moment from 'moment';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {GET_LIST, SAVE_RECORD, GET_RECORD, DELETE_RECORD, RECORD_CLEAR_STATUS, GET_ALL_LIST} from '../constants/records';
+import {GET_ALL_LIST, SAVE_ALL_RECORD, GET_ALL_RECORD, DELETE_ALL_RECORD, RECORD_ALL_CLEAR_STATUS} from '../constants/allRecords';
 import {getJWT} from '../utils/AuthUtil';
 
 export function save(data) {
   return dispatch => {
-    let obj = data._id ? request.put(`${CONFIG.apiURL}/api/records`, data) : request.post(`${CONFIG.apiURL}/api/records`, data);
+    let obj = data._id ? request.put(`${CONFIG.apiURL}/api/all_records`, data) : request.post(`${CONFIG.apiURL}/api/all_records`, data);
     return obj.set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',
@@ -24,7 +24,7 @@ export function save(data) {
         }
 
         dispatch({
-          type: `${SAVE_RECORD}${status}`,
+          type: `${SAVE_ALL_RECORD}${status}`,
           data
         });
       })
@@ -34,7 +34,7 @@ export function save(data) {
 export function getList() {
   return dispatch => {
     return request
-      .get(`${CONFIG.apiURL}/api/records`)
+      .get(`${CONFIG.apiURL}/api/all_records`)
       .set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',
@@ -49,7 +49,7 @@ export function getList() {
         }
 
         dispatch({
-          type: `${GET_LIST}${status}`,
+          type: `${GET_ALL_LIST}${status}`,
           data
         });
       })
@@ -59,7 +59,7 @@ export function getList() {
 export function getRecord(id) {
   return dispatch => {
     return request
-      .get(`${CONFIG.apiURL}/api/records/${id}`)
+      .get(`${CONFIG.apiURL}/api/all_records/${id}`)
       .set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',
@@ -76,7 +76,7 @@ export function getRecord(id) {
         }
 
         dispatch({
-          type: `${GET_RECORD}${status}`,
+          type: `${GET_ALL_RECORD}${status}`,
           data
         });
       })
@@ -85,7 +85,7 @@ export function getRecord(id) {
 
 export function deleteItem(id) {
   return dispatch => {
-    return request.delete(`${CONFIG.apiURL}/api/records/${id}`)
+    return request.delete(`${CONFIG.apiURL}/api/all_records/${id}`)
       .set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',
@@ -104,7 +104,7 @@ export function deleteItem(id) {
         }
 
         dispatch({
-          type: `${DELETE_RECORD}${status}`,
+          type: `${DELETE_ALL_RECORD}${status}`,
           data
         });
       })
@@ -114,7 +114,7 @@ export function deleteItem(id) {
 export function clearStatus() {
   return dispatch => {
     dispatch({
-      type: `${RECORD_CLEAR_STATUS}${_SUCCESS}`
+      type: `${RECORD_ALL_CLEAR_STATUS}${_SUCCESS}`
     });
   }
 }

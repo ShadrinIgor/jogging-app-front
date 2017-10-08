@@ -10,6 +10,7 @@ import RecordForm from './RecordForm';
 import Reports from './Reports';
 import Users from './Users';
 import UserForm from './UserForm';
+import AllRecords from './AllRecords';
 import notFoundRoute from './NotFound';
 
 import Header from '../components/Header';
@@ -40,6 +41,9 @@ class Routes extends Component {
           <Route exact path='/users' component={Users}/>
           <Route exact path='/userForm' component={UserForm}/>
           <Route exact path='/userForm/:id' component={UserForm}/>
+          <Route exact path='/allRecords' component={AllRecords}/>
+          <Route exact path='/allRecords' component={AllRecords}/>
+          <Route exact path='/allRecords/:id' component={AllRecords}/>
           <Route component={notFoundRoute}/>
         </Switch>
       </div>

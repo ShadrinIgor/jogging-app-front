@@ -1,5 +1,6 @@
 import {combineForms} from 'react-redux-form';
 import records from './records';
+import allRecords from './allRecords';
 import users from './users';
 import userForm from './userForm';
 import auth from './auth';
@@ -14,5 +15,6 @@ export default combineForms({
   auth,
   registrationForm,
   recordForm,
-  reports
+  reports,
+  allRecords
 });
