@@ -7,6 +7,7 @@ import {getLocalStoreData, isAuth} from '../utils/AuthUtil';
 import RegistrationForm from './RegistrationForm';
 import RecordForm from './RecordForm';
 import Records from './Records';
+import Reports from './Reports';
 import notFoundRoute from './NotFound';
 
 import Header from '../components/Header';
@@ -31,6 +32,7 @@ class Routes extends Component {
             isAuth() ? <Records /> : <RegistrationForm />
           )}/>
           <Route exact path='/records' component={Records}/>
+          <Route exact path='/reports' component={Reports}/>
           <Route exact path='/recordForm' component={RecordForm}/>
           <Route exact path='/recordForm/:id' component={RecordForm}/>
           <Route component={notFoundRoute}/>
