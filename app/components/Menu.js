@@ -5,7 +5,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 class Menu extends Component {
   render() {
-    const {isAdmin} = this.props;
+    // const {isAdmin} = this.props;
+    const isAdmin = true;
     return <div className="m-b-10">
       <Nav bsStyle="pills">
         <LinkContainer to="/"><NavItem eventKey={1}>Recodrs</NavItem></LinkContainer>

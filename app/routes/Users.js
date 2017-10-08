@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Panel, Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import moment from 'moment';
-import {NotificationManager, NotificationContainer} from 'react-notifications';
-import {getList, deleteItem, clearStatus} from '../actions/UsersActions';
-import {getSpeed} from '../utils/HelperUtil';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {clearStatus, deleteItem, getList} from '../actions/UsersActions';
 
 class Users extends Component {
 
@@ -19,14 +17,14 @@ class Users extends Component {
   }
 
   componentWillUpdate(nextProps, nestState) {
-    if(nextProps.users.status === 'deleted') {
-      NotificationManager.success('The record successfully deleted', 'Users');
+    if (nextProps.users.status === 'deleted') {
+      NotificationManager.success('The user successfully deleted', 'Users');
       this.props.clearStatus();
     }
   }
 
-  deleteRecord(id) {
-    if (confirm('Do you wont delete record?')) {
+  deleteUser(id) {
+    if (confirm('Do you wont delete user?')) {
       this.props.deleteItem(id);
     }
   }
@@ -53,8 +51,10 @@ class Users extends Component {
                 <td>{item.name}</td>
                 <td>{item.surname}</td>
                 <td className="text-center">
-                  <Link className="glyphicon glyphicon-pencil m-r-5" to={`/recordForm/${item._id}`} />
-                  <a className="glyphicon glyphicon-trash" onClick={()=>{this.deleteRecord.call(this, item._id)}} />
+                  <Link className="glyphicon glyphicon-pencil m-r-5" to={`/userForm/${item._id}`}/>
+                  <a className="glyphicon glyphicon-trash" onClick={() => {
+                    this.deleteUser.call(this, item._id)
+                  }}/>
                 </td>
               </tr>
             )
@@ -68,7 +68,7 @@ class Users extends Component {
         </tbody>
       </Table>
       <div className="pull-right">
-        <Link className="btn btn-success" to="/recordForm">Add new record</Link>
+        <Link className="btn btn-success" to="/userForm">Add new user</Link>
       </div>
     </Panel>
   }

@@ -5,10 +5,11 @@ import {connect} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
 import {getLocalStoreData, isAuth} from '../utils/AuthUtil';
 import RegistrationForm from './RegistrationForm';
-import RecordForm from './RecordForm';
 import Records from './Records';
+import RecordForm from './RecordForm';
 import Reports from './Reports';
 import Users from './Users';
+import UserForm from './UserForm';
 import notFoundRoute from './NotFound';
 
 import Header from '../components/Header';
@@ -37,6 +38,8 @@ class Routes extends Component {
           <Route exact path='/recordForm/:id' component={RecordForm}/>
           <Route exact path='/reports' component={Reports}/>
           <Route exact path='/users' component={Users}/>
+          <Route exact path='/userForm' component={UserForm}/>
+          <Route exact path='/userForm/:id' component={UserForm}/>
           <Route component={notFoundRoute}/>
         </Switch>
       </div>

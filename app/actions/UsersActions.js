@@ -1,6 +1,15 @@
 import request from 'superagent';
+import {getJWT} from '../utils/AuthUtil';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {CREATE_USER, DELETE_USER, LIST_USER, SAVE_USER, USER_CLEAR_STATUS} from '../constants/users';
+import {
+  CREATE_USER,
+  DELETE_USER,
+  GET_USER,
+  LIST_USER,
+  SAVE_USER,
+  USER_CLEAR_DATA,
+  USER_CLEAR_STATUS
+} from '../constants/users';
 
 export function createUser(data) {
   return dispatch => {
@@ -9,7 +18,7 @@ export function createUser(data) {
     });
 
     return request
-      .post(`${CONFIG.apiURL}/api/users`, data)
+      .post(`${CONFIG.apiURL}/api/users/registration`, data)
       .end((error, response) => {
         let status = '',
           data = {};
@@ -19,7 +28,7 @@ export function createUser(data) {
         }
         else {
           status = _SUCCESS;
-          data = {user:response, status: 'created'};
+          data = {user: response, status: 'created'};
         }
 
         dispatch({
@@ -32,7 +41,8 @@ export function createUser(data) {
 
 export function save(data) {
   return dispatch => {
-    let obj = data._id ? request.put(`${CONFIG.apiURL}/api/users`, data) : request.post(`${CONFIG.apiURL}/api/users`, data);
+    let obj = data._id ? request.put(`${CONFIG.apiURL}/api/users`, data) : request.post(
+      `${CONFIG.apiURL}/api/users`, data);
     return obj.set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',
@@ -82,7 +92,7 @@ export function getList() {
   };
 }
 
-export function getRecord(id) {
+export function getUser(id) {
   return dispatch => {
     return request
       .get(`${CONFIG.apiURL}/api/users/${id}`)
@@ -98,7 +108,6 @@ export function getRecord(id) {
         else {
           status = _SUCCESS;
           data.fields = response.body.data;
-          data.fields.date = moment(data.fields.date).format("DD.MM.YYYY");
         }
 
         dispatch({
@@ -141,6 +150,14 @@ export function clearStatus() {
   return dispatch => {
     dispatch({
       type: `${USER_CLEAR_STATUS}${_SUCCESS}`
+    });
+  }
+}
+
+export function clearData() {
+  return dispatch => {
+    dispatch({
+      type: `${USER_CLEAR_DATA}${_SUCCESS}`
     });
   }
 }

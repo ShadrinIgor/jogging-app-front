@@ -5,3 +5,4 @@ export const DELETE_USER = 'DELETE_USER';
 export const SAVE_USER = 'SAVE_USER';
 export const GET_USER = 'GET_USER';
 export const USER_CLEAR_STATUS = 'USER_CLEAR_STATUS';
+export const USER_CLEAR_DATA = 'USER_CLEAR_DATA';
