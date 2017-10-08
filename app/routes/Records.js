@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {Panel, Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
-import {getList, deleteItem} from '../actions/RecordsActions';
+import {NotificationManager, NotificationContainer} from 'react-notifications';
+import {getList, deleteItem, clearStatus} from '../actions/RecordsActions';
 
 class Records extends Component {
 
@@ -14,6 +15,13 @@ class Records extends Component {
 
   componentWillMount() {
     this.props.getList();
+  }
+
+  componentWillUpdate(nextProps, nestState) {
+    if(nextProps.records.status === 'deleted') {
+      NotificationManager.success('The record successfully deleted', 'Records');
+      this.props.clearStatus();
+    }
   }
 
   getSpeed(distance, time) {
@@ -29,13 +37,14 @@ class Records extends Component {
 
   deleteRecord(id) {
     if (confirm('Do you wont delete record?')) {
-      deleteItem(id);
+      this.props.deleteItem(id);
     }
   }
 
   render() {
     const {records} = this.props;
     return <Panel header="Records" bsStyle="success">
+      <NotificationContainer />
       <Table striped bordered condensed hover>
         <thead>
         <tr>
@@ -57,7 +66,7 @@ class Records extends Component {
                 <td>{this.getSpeed(item.distance, item.time)}</td>
                 <td className="text-center">
                   <Link className="glyphicon glyphicon-pencil m-r-5" to={`/recordForm/${item._id}`} />
-                  <a className="glyphicon glyphicon-trash" onClick={this.deleteRecord.bind(this)} />
+                  <a className="glyphicon glyphicon-trash" onClick={()=>{this.deleteRecord.call(this, item._id)}} />
                 </td>
               </tr>
             )
@@ -85,8 +94,11 @@ export default connect(
     getList: () => {
       dispatch(getList());
     },
-    deleteItem: () => {
-      dispatch(deleteItem());
+    deleteItem: (id) => {
+      dispatch(deleteItem(id));
+    },
+    clearStatus: () => {
+      dispatch(clearStatus());
     }
   })
 )(Records);
