@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 import {NotificationManager, NotificationContainer} from 'react-notifications';
 import {getReports} from '../actions/ReportsActions';
+import {getSpeed} from '../utils/HelperUtil';
 
 class Reports extends Component {
 
@@ -33,10 +34,10 @@ class Reports extends Component {
         {
           reports.items && reports.items.map(item => {
             return (
-              <tr key={item._id}>
-                <td>{moment(item.date).format('ll')}</td>
+              <tr key={item.index}>
+                <td>{item.index}</td>
                 <td>{item.distance}</td>
-                <td>{item.distance}</td>
+                <td>{getSpeed(item.distance, item.time)}</td>
               </tr>
             )
           })

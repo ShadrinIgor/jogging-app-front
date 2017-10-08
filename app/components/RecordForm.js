@@ -38,7 +38,7 @@ export default class RecordForm extends Component {
     };
     const {errors} = this.props.recordForm;
 
-    return <Panel header={this.props.recordForm.id ? "Update record" : "Add record"} bsStyle="success">
+    return <Panel header={this.props.recordForm._id.length ? "Update record" : "Add record"} bsStyle="success">
       <Form model="recordForm" onSubmit={(val) => this.handleSubmit.call(this, val)}
             validators={{
               '': {
@@ -47,6 +47,7 @@ export default class RecordForm extends Component {
             }}>
 
         <NotificationContainer/>
+        {this.props.recordForm._id}
         <div className="row">
           <Errors
             model="recordForm"
@@ -83,7 +84,7 @@ export default class RecordForm extends Component {
         <div className="pull-right">
           <Link className="btn btn-default m-r-5" to="/">Cancel</Link>
           <button type="submit" disabled={Object.keys(errors).length ? 'disabled' : ''}
-                  className="btn btn-success pull-right">{this.props.recordForm.id ? 'Create' : 'Update'}</button>
+                  className="btn btn-success pull-right">{this.props.recordForm._id.length ? 'Update' : 'Create'}</button>
         </div>
       </Form>
     </Panel>

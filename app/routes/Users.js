@@ -4,10 +4,10 @@ import {Panel, Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import {NotificationManager, NotificationContainer} from 'react-notifications';
-import {getList, deleteItem, clearStatus} from '../actions/RecordsActions';
+import {getList, deleteItem, clearStatus} from '../actions/UsersActions';
 import {getSpeed} from '../utils/HelperUtil';
 
-class Records extends Component {
+class Users extends Component {
 
   constructor() {
     super();
@@ -19,8 +19,8 @@ class Records extends Component {
   }
 
   componentWillUpdate(nextProps, nestState) {
-    if(nextProps.records.status === 'deleted') {
-      NotificationManager.success('The record successfully deleted', 'Records');
+    if(nextProps.users.status === 'deleted') {
+      NotificationManager.success('The record successfully deleted', 'Users');
       this.props.clearStatus();
     }
   }
@@ -32,28 +32,26 @@ class Records extends Component {
   }
 
   render() {
-    const {records} = this.props;
-    return <Panel header="Records" bsStyle="success">
+    const {users} = this.props;
+    return <Panel header="Users" bsStyle="success">
       <NotificationContainer />
       <Table striped bordered condensed hover>
         <thead>
         <tr>
-          <th>Data</th>
-          <th>Distance (Metres)</th>
-          <th>Time</th>
-          <th>Average speed(Km/hr)</th>
+          <th>Email</th>
+          <th>First name</th>
+          <th>Last name</th>
           <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         {
-          records.items && records.items.map(item => {
+          users.items && users.items.map(item => {
             return (
               <tr key={item._id}>
-                <td>{moment(item.date).format('ll')}</td>
-                <td>{item.distance}</td>
-                <td>{item.time}</td>
-                <td>{getSpeed(item.distance, item.time)}</td>
+                <td>{item.email}</td>
+                <td>{item.name}</td>
+                <td>{item.surname}</td>
                 <td className="text-center">
                   <Link className="glyphicon glyphicon-pencil m-r-5" to={`/recordForm/${item._id}`} />
                   <a className="glyphicon glyphicon-trash" onClick={()=>{this.deleteRecord.call(this, item._id)}} />
@@ -63,7 +61,7 @@ class Records extends Component {
           })
         }
         {
-          (!records.items || !records.items.length) && <tr>
+          (!users.items || !users.items.length) && <tr>
             <td colSpan="5" className="text-center"><p>No have items</p></td>
           </tr>
         }
@@ -78,7 +76,7 @@ class Records extends Component {
 
 export default connect(
   state => ({
-    records: state.records
+    users: state.users
   }),
   dispatch => ({
     getList: () => {
@@ -91,4 +89,4 @@ export default connect(
       dispatch(clearStatus());
     }
   })
-)(Records);
+)(Users);
