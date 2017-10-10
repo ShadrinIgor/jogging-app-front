@@ -60,3 +60,10 @@
 .panel-success>.panel-heading {
     font-size: 20px;
 }
+
+.clearDateButton {
+    position: absolute;
+    right: 0;
+    margin-top: -34px;
+    margin-right: 14px;
+}

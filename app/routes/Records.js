@@ -48,6 +48,14 @@ class Records extends Component {
     this.props.getList(this.state.sort, this.state.filter);
   }
 
+  clearDateFrom(){
+    this.setState({...this.state, filter: {...this.state.filter, dateFrom: '' } });
+  }
+
+  clearDateTo(){
+    this.setState({...this.state, filter: {...this.state.filter, dateTo: '' } });
+  }
+
   render() {
     const {records} = this.props;
     return <div>
@@ -64,6 +72,7 @@ class Records extends Component {
                 onDayChange={this.handleDayChange.bind(this)}
                 format={'DD.MM.YYYY'}
                 placeholder={`Date from`}/>
+              {this.state.filter.dateFrom && <a title="Clear field" className="btn btn-danger clearDateButton" onClick={this.clearDateFrom.bind(this)}>X</a> }
             </div>
           </div>
           <div className="form-group col-xs-5">
@@ -76,6 +85,7 @@ class Records extends Component {
                 onDayChange={this.handleDayChange.bind(this)}
                 format={'DD.MM.YYYY'}
                 placeholder={`Date to`}/>
+              {this.state.filter.dateTo && <a title="Clear field" className="btn btn-danger clearDateButton" onClick={this.clearDateTo.bind(this)}>X</a> }
             </div>
           </div>
           <div className="form-group col-xs-2">

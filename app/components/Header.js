@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {authLogin, logOut} from '../actions/AuthActions';
 import {clearLocalStoreData, getLocalStoreData} from '../utils/AuthUtil';
