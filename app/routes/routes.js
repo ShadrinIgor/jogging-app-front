@@ -37,13 +37,13 @@ class Routes extends Component {
     return (
       <div className="container">
         <Header />
-        <Menu role={this.state.user.role}/>
+        {isAuth() && <Menu role={this.state.user.role}/>}
         <Switch>
           <Route exact path='/' render={props => (
             isAuth() ? <Records /> : <RegistrationForm />
           )}/>
           <Route exact path='/records' component={Records}/>
-          <Route exact path='/recordForm' component={RecordForm}/>
+          <Route exact path='/recordForm' userRole={this.state.user.role} component={RecordForm}/>
           <Route exact path='/recordForm/:id' component={RecordForm}/>
           <Route exact path='/reports' component={Reports}/>
           <Route exact path='/users' component={Users}/>

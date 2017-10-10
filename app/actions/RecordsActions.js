@@ -31,11 +31,17 @@ export function save(data) {
   };
 }
 
-export function getList(sort) {
+export function getList(sort, filter) {
   let dopUrl = '';
-  if(sort){
+  if(sort && sort.field){
     dopUrl += `?sort=${sort.field}&type=${sort.type}`;
   }
+  if(filter){
+    Object.keys(filter).map(field=>{
+      if(filter[field])dopUrl += `${dopUrl.length ? '&' : '?'}filter[${field}]=${filter[field]}`;
+    });
+  }
+
   return dispatch => {
     return request
       .get(`${CONFIG.apiURL}/api/records/${dopUrl}`)

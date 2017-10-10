@@ -47,10 +47,9 @@ export default class RecordForm extends Component {
             }}>
 
         <NotificationContainer/>
-        {this.props.recordForm._id}
         <div className="row">
           <Errors
-            model="recordForm"
+            model="state."
             show={{touched: true, focus: false}}
             wrapper={(props) => <div className="errors">{props.children}</div>}
             messages={{

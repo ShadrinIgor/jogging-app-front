@@ -26,7 +26,13 @@ class UForm extends Component {
       NotificationManager.success('User success save', 'Form');
     }
     if (!Object.keys(this.props.userForm.errors).length && Object.keys(nextProps.userForm.errors).length) {
-      NotificationManager.error('Form filling error', 'Form');
+      console.log('error', nextProps.userForm.errors);
+      let errorMessage = 'Form filling error';
+      if(nextProps.userForm.errors['role']){
+        errorMessage = nextProps.userForm.errors['role'];
+      }
+      NotificationManager.error(errorMessage, 'Form');
+      this.props.userForm.errors = [];
     }
   }
 
@@ -36,7 +42,7 @@ class UForm extends Component {
     }
     return <div className="panel-default col-xs-6 center-form">
       {this.state.saved && <Redirect to="/users"/>}
-      {!this.state.saved && <UserForm userForm={this.props.userForm} save={this.props.saveItem.bind()}/>}
+      {!this.state.saved && <UserForm userForm={this.props.userForm} userRole={this.props.userRole} save={this.props.saveItem.bind()}/>}
     </div>
   }
 }
