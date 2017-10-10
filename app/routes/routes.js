@@ -19,13 +19,13 @@ import Menu from '../components/Menu';
 import {setAuth} from '../actions/AuthActions';
 
 class Routes extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.state = {};
+    this.state = {user: {admin: false}};
   }
 
-  componentWillMount(){
-    if(isAuth() && !this.props.auth.login){
+  componentWillMount() {
+    if (isAuth() && !this.props.auth.login) {
       let {token, user} = getLocalStoreData();
       this.props.setAuth({token, user: JSON.parse(user)});
       this.setState({user: JSON.parse(user)});
@@ -33,10 +33,11 @@ class Routes extends Component {
   }
 
   render() {
+    console.log('1', this.state);
     return (
       <div className="container">
         <Header />
-        <Menu isAdmin={this.state.admin} />
+        <Menu role={this.state.user.role}/>
         <Switch>
           <Route exact path='/' render={props => (
             isAuth() ? <Records /> : <RegistrationForm />
@@ -65,6 +66,6 @@ export default connect(
   dispatch => ({
     setAuth: (data) => {
       dispatch(setAuth(data));
-    },
+    }
   })
 )(Routes);

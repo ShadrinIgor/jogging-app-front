@@ -55,8 +55,9 @@ export default class UserForm extends Component {
         <div className="form-group">
           <Control.select model=".role" className="form-control" id="role"
                         placeholder="Role">
-            <option value="false">User</option>
-            <option value="true">Admin</option>
+            <option value="1">User</option>
+            <option value="2">User manager</option>
+            <option value="3">Admin</option>
           </Control.select>
         </div>
         <div className="pull-right">
