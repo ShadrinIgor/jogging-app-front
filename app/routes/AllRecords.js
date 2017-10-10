@@ -38,6 +38,7 @@ class AllRecords extends Component {
       <Table striped bordered condensed hover>
         <thead>
         <tr>
+          <th>Email</th>
           <th>Data</th>
           <th>Distance (Metres)</th>
           <th>Time</th>
@@ -50,12 +51,13 @@ class AllRecords extends Component {
           allRecords.items && allRecords.items.map(item => {
             return (
               <tr key={item._id}>
+                <td>{item.email}</td>
                 <td>{moment(item.date).format('ll')}</td>
                 <td>{item.distance}</td>
                 <td>{item.time}</td>
                 <td>{getSpeed(item.distance, item.time)}</td>
                 <td className="text-center">
-                  <Link className="glyphicon glyphicon-pencil m-r-5" to={`/recordForm/${item._id}`} />
+                  <Link className="glyphicon glyphicon-pencil m-r-5" to={`/allRecordForm/${item._id}`} />
                   <a className="glyphicon glyphicon-trash" onClick={()=>{this.deleteRecord.call(this, item._id)}} />
                 </td>
               </tr>
@@ -70,7 +72,7 @@ class AllRecords extends Component {
         </tbody>
       </Table>
       <div className="pull-right">
-        <Link className="btn btn-success" to="/recordForm">Add new record</Link>
+        <Link className="btn btn-success" to="/allRecordForm">Add new record</Link>
       </div>
     </Panel>
   }

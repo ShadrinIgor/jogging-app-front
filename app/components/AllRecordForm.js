@@ -21,25 +21,25 @@ export default class RecordForm extends Component {
 
   handleDayChange(date) {
     this.setState({status: ''});
-    this.props.recordForm.date = date.format('DD.MM.YYYY');
-    delete this.props.recordForm.errors.date;
+    this.props.allRecordForm.date = date.format('DD.MM.YYYY');
+    delete this.props.allRecordForm.errors.date;
     this.setState({status: 'update'});
   }
 
   validateNumberHandle(data) {
     const nameParam = data.target.name.split('.');
     const field = nameParam[1];
-    validateNumber(field, data.target.value, this.props.recordForm.errors);
+    validateNumber(field, data.target.value, this.props.allRecordForm.errors);
   }
 
   render() {
     const allFieldRequired = vals => {
       return vals.date && vals.distance && vals.time
     };
-    const {errors} = this.props.recordForm;
+    const {errors} = this.props.allRecordForm;
 
-    return <Panel header={!this.props.recordForm._id.length ? "Update record" : "Add record"} bsStyle="success">
-      <Form model="recordForm" onSubmit={(val) => this.handleSubmit.call(this, val)}
+    return <Panel header={this.props.allRecordForm._id.length ? "Update record" : "Add record"} bsStyle="success">
+      <Form model="allRecordForm" onSubmit={(val) => this.handleSubmit.call(this, val)}
             validators={{
               '': {
                 allFieldRequired
@@ -47,10 +47,10 @@ export default class RecordForm extends Component {
             }}>
 
         <NotificationContainer/>
-        {this.props.recordForm._id}
+        {this.props.allRecordForm._id}
         <div className="row">
           <Errors
-            model="recordForm"
+            model="allRecordForm"
             show={{touched: true, focus: false}}
             wrapper={(props) => <div className="errors">{props.children}</div>}
             messages={{
@@ -61,8 +61,8 @@ export default class RecordForm extends Component {
         </div>
         <div className="form-group">
           <DayPickerInput
-            name="recordForm.date"
-            value={this.props.recordForm.date}
+            name="allRecordForm.date"
+            value={this.props.allRecordForm.date}
             readOnly="readonly"
             className="form-control"
             onDayChange={this.handleDayChange.bind(this)}
@@ -82,9 +82,9 @@ export default class RecordForm extends Component {
           <FieldError errors={errors.time}/>
         </div>
         <div className="pull-right">
-          <Link className="btn btn-default m-r-5" to="/">Cancel</Link>
+          <Link className="btn btn-default m-r-5" to="/allRecords">Cancel</Link>
           <button type="submit" disabled={Object.keys(errors).length ? 'disabled' : ''}
-                  className="btn btn-success pull-right">{!this.props.recordForm._id.length ? 'Update' : 'Create'}</button>
+                  className="btn btn-success pull-right">{this.props.allRecordForm._id.length ? 'Update' : 'Create'}</button>
         </div>
       </Form>
     </Panel>
