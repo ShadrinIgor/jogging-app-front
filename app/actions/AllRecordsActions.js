@@ -1,12 +1,20 @@
 import request from 'superagent';
 import moment from 'moment';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {GET_ALL_LIST, SAVE_ALL_RECORD, GET_ALL_RECORD, DELETE_ALL_RECORD, RECORD_ALL_CLEAR_STATUS} from '../constants/allRecords';
+import {
+  DELETE_ALL_RECORD,
+  GET_ALL_LIST,
+  GET_ALL_RECORD,
+  RECORD_ALL_CLEAR_STATUS,
+  SAVE_ALL_RECORD,
+  RECORD_ALL_CLEAR_FORM_DATA
+} from '../constants/allRecords';
 import {getJWT} from '../utils/AuthUtil';
 
 export function save(data) {
   return dispatch => {
-    let obj = data._id ? request.put(`${CONFIG.apiURL}/api/all_records`, data) : request.post(`${CONFIG.apiURL}/api/all_records`, data);
+    let obj = data._id ? request.put(`${CONFIG.apiURL}/api/all_records`, data) : request.post(
+      `${CONFIG.apiURL}/api/all_records`, data);
     return obj.set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',
@@ -72,7 +80,7 @@ export function getRecord(id) {
         else {
           status = _SUCCESS;
           data.fields = response.body.data;
-          data.fields.date = moment(data.fields.date).format("DD.MM.YYYY");
+          data.fields.date = moment(data.fields.date).format('DD.MM.YYYY');
         }
 
         dispatch({
@@ -115,6 +123,14 @@ export function clearStatus() {
   return dispatch => {
     dispatch({
       type: `${RECORD_ALL_CLEAR_STATUS}${_SUCCESS}`
+    });
+  }
+}
+
+export function clearFormData() {
+  return dispatch => {
+    dispatch({
+      type: `${RECORD_ALL_CLEAR_FORM_DATA}${_SUCCESS}`
     });
   }
 }

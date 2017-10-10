@@ -37,6 +37,7 @@ export default class RecordForm extends Component {
       return vals.date && vals.distance && vals.time
     };
     const {errors} = this.props.allRecordForm;
+    console.log(1, this.props.users);
 
     return <Panel header={this.props.allRecordForm._id.length ? "Update record" : "Add record"} bsStyle="success">
       <Form model="allRecordForm" onSubmit={(val) => this.handleSubmit.call(this, val)}
@@ -47,7 +48,6 @@ export default class RecordForm extends Component {
             }}>
 
         <NotificationContainer/>
-        {this.props.allRecordForm._id}
         <div className="row">
           <Errors
             model="allRecordForm"
@@ -58,6 +58,12 @@ export default class RecordForm extends Component {
               incorrectEmail: 'Incorrect email'
             }}
           />
+        </div>
+        <div className="form-group">
+          <Control.select type="text" model=".userId" className="form-control" id="email" placeholder="User">
+            {Object.keys(this.props.users.items).map(key=>(<option key={key} value={key}>{this.props.users.items[key]}</option>))}
+          </Control.select>
+          <FieldError errors={errors.distance}/>
         </div>
         <div className="form-group">
           <DayPickerInput

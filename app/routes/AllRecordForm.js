@@ -4,7 +4,7 @@ import {Form} from 'react-redux-form';
 import {Redirect} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
 import {_SUCCESS} from '../constants/baseTypes';
-import {getRecord, save} from '../actions/AllRecordsActions';
+import {getRecord, save, } from '../actions/AllRecordsActions';
 import AllRecordForm from '../components/AllRecordForm';
 import 'react-day-picker/lib/style.css';
 
@@ -33,7 +33,7 @@ class ARForm extends Component {
   render() {
     return <div className="panel-default col-xs-6 center-form">
       {this.state.saved && <Redirect to="/allRecords"/>}
-      {!this.state.saved && <AllRecordForm allRecordForm={this.props.allRecordForm} save={this.props.saveItem.bind()}/>}
+      {!this.state.saved && <AllRecordForm allRecordForm={this.props.allRecordForm} users={this.props.allRecords.users} save={this.props.saveItem.bind()}/>}
     </div>
   }
 }

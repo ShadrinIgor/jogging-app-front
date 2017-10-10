@@ -6,7 +6,6 @@ export function authLogin(email, password) {
   return dispatch => {
     return request
       .post(`${CONFIG.apiURL}/api/auth`, {email, password})
-      //      .set({'Authorization': AuthUtil.hasAuthCookie()})
       .end((error, response) => {
         let status = '',
           data = {};

@@ -4,7 +4,7 @@ import {Panel, Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import {NotificationManager, NotificationContainer} from 'react-notifications';
-import {getList, deleteItem, clearStatus} from '../actions/AllRecordsActions';
+import {getList, deleteItem, clearStatus, clearFormData} from '../actions/AllRecordsActions';
 import {getSpeed} from '../utils/HelperUtil';
 
 class AllRecords extends Component {
@@ -16,6 +16,7 @@ class AllRecords extends Component {
 
   componentWillMount() {
     this.props.getList();
+    this.props.clearFormData();
   }
 
   componentWillUpdate(nextProps, nestState) {
@@ -57,7 +58,7 @@ class AllRecords extends Component {
                 <td>{item.time}</td>
                 <td>{getSpeed(item.distance, item.time)}</td>
                 <td className="text-center">
-                  <Link className="glyphicon glyphicon-pencil m-r-5" to={`/allRecordForm/${item._id}`} />
+                  <Link className="glyphicon glyphicon-pencil m-r-5"  to={`/allRecordForm/${item._id}`} />
                   <a className="glyphicon glyphicon-trash" onClick={()=>{this.deleteRecord.call(this, item._id)}} />
                 </td>
               </tr>
@@ -66,13 +67,13 @@ class AllRecords extends Component {
         }
         {
           (!allRecords.items || !allRecords.items.length) && <tr>
-            <td colSpan="5" className="text-center"><p>No have items</p></td>
+            <td colSpan="6" className="text-center"><p>No have items</p></td>
           </tr>
         }
         </tbody>
       </Table>
       <div className="pull-right">
-        <Link className="btn btn-success" to="/allRecordForm">Add new record</Link>
+        <Link className="btn btn-success" to="/allRecordForm" >Add new record</Link>
       </div>
     </Panel>
   }
@@ -91,6 +92,9 @@ export default connect(
     },
     clearStatus: () => {
       dispatch(clearStatus());
+    },
+    clearFormData: () => {
+      dispatch(clearFormData());
     }
   })
 )(AllRecords);
