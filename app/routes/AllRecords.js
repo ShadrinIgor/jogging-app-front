@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 import {NotificationManager, NotificationContainer} from 'react-notifications';
 import {getList, deleteItem, clearStatus, clearFormData} from '../actions/AllRecordsActions';
-import {getSpeed} from '../utils/HelperUtil';
+import {getSpeed, getOrderIco} from '../utils/HelperUtil';
 
 class AllRecords extends Component {
 
@@ -33,7 +33,7 @@ class AllRecords extends Component {
   }
 
   sort(field) {
-    let sort = {field, type: this.state.sort.type === 'ask' ? 'desc' : 'ask' };
+    let sort = {field, type: this.state.sort.type === 'asc' ? 'desc' : 'asc' };
     this.setState({...this.state, sort });
     this.props.getList(sort);
   }
@@ -47,7 +47,7 @@ class AllRecords extends Component {
         <thead>
         <tr>
           <th>Email </th>
-          <th>Data <a className="btn" onClick={this.sort.bind(this, 'date')}>сорт</a></th>
+          <th>Data <a className={getOrderIco(this.state.sort, 'date')} onClick={this.sort.bind(this, 'date')}></a></th>
           <th>Distance (Metres)</th>
           <th>Time</th>
           <th>Average speed(Km/hr)</th>
