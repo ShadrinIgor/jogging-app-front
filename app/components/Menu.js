@@ -11,7 +11,7 @@ class Menu extends Component {
         <LinkContainer to="/"><NavItem eventKey={1}>Recodrs</NavItem></LinkContainer>
         <LinkContainer to="/reports"><NavItem eventKey={2}>Reports</NavItem></LinkContainer>
         {isAdmin && <LinkContainer to="/users"><NavItem eventKey={3}>Users</NavItem></LinkContainer>}
-        {isAdmin && <LinkContainer to="/allRecords"><NavItem eventKey={4}>All Records</NavItem></LinkContainer>}
+        <LinkContainer to="/allRecords"><NavItem eventKey={4}>All Records</NavItem></LinkContainer>
       </Nav>
     </div>
   }

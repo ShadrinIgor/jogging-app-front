@@ -31,10 +31,14 @@ export function save(data) {
   };
 }
 
-export function getList() {
+export function getList(sort) {
+  let dopUrl = '';
+  if(sort){
+    dopUrl += `?sort=${sort.field}&type=${sort.type}`;
+  }
   return dispatch => {
     return request
-      .get(`${CONFIG.apiURL}/api/records`)
+      .get(`${CONFIG.apiURL}/api/records/${dopUrl}`)
       .set({'Authorization': getJWT()})
       .end((error, response) => {
         let status = '',

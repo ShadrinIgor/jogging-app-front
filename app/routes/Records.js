@@ -11,7 +11,7 @@ class Records extends Component {
 
   constructor() {
     super();
-    this.state = {list: []};
+    this.state = {list: [], sort:{field:'', type: 'desc'}};
   }
 
   componentWillMount() {
@@ -31,6 +31,13 @@ class Records extends Component {
     }
   }
 
+  sort(field) {
+    let sort = {field, type: this.state.sort.type === 'ask' ? 'desc' : 'ask' };
+    this.setState({...this.state, sort });
+    console.log('1', this.props);
+    this.props.getList(sort);
+  }
+
   render() {
     const {records} = this.props;
     return <Panel header="Records" bsStyle="success">
@@ -38,7 +45,7 @@ class Records extends Component {
       <Table striped bordered condensed hover>
         <thead>
         <tr>
-          <th>Data</th>
+          <th>Data <a className="btn" onClick={this.sort.bind(this, 'date')}>сорт</a> </th>
           <th>Distance (Metres)</th>
           <th>Time</th>
           <th>Average speed(Km/hr)</th>
@@ -81,8 +88,8 @@ export default connect(
     records: state.records
   }),
   dispatch => ({
-    getList: () => {
-      dispatch(getList());
+    getList: (sort) => {
+      dispatch(getList(sort));
     },
     deleteItem: (id) => {
       dispatch(deleteItem(id));
