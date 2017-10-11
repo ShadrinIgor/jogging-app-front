@@ -4,7 +4,7 @@ import {Panel, Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import {clearStatus, deleteItem, getList} from '../actions/RecordsActions';
+import {clearFormData, clearStatus, deleteItem, getList} from '../actions/RecordsActions';
 import {getOrderIco, getSpeed} from '../utils/HelperUtil';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 
@@ -17,6 +17,7 @@ class Records extends Component {
 
   componentWillMount() {
     this.props.getList();
+    this.props.clearFormData();
   }
 
   componentWillUpdate(nextProps, nestState) {
@@ -35,7 +36,6 @@ class Records extends Component {
   sort(field) {
     let sort = {field, type: this.state.sort.type === 'asc' ? 'desc' : 'asc'};
     this.setState({...this.state, sort});
-    console.log('1', this.props);
     this.props.getList(sort, this.state.filter);
   }
 
@@ -48,12 +48,12 @@ class Records extends Component {
     this.props.getList(this.state.sort, this.state.filter);
   }
 
-  clearDateFrom(){
-    this.setState({...this.state, filter: {...this.state.filter, dateFrom: '' } });
+  clearDateFrom() {
+    this.setState({...this.state, filter: {...this.state.filter, dateFrom: ''}});
   }
 
-  clearDateTo(){
-    this.setState({...this.state, filter: {...this.state.filter, dateTo: '' } });
+  clearDateTo() {
+    this.setState({...this.state, filter: {...this.state.filter, dateTo: ''}});
   }
 
   render() {
@@ -72,7 +72,8 @@ class Records extends Component {
                 onDayChange={this.handleDayChange.bind(this)}
                 format={'DD.MM.YYYY'}
                 placeholder={`Date from`}/>
-              {this.state.filter.dateFrom && <a title="Clear field" className="btn btn-danger clearDateButton" onClick={this.clearDateFrom.bind(this)}>X</a> }
+              {this.state.filter.dateFrom &&
+              <a title="Clear field" className="btn btn-danger clearDateButton" onClick={this.clearDateFrom.bind(this)}>X</a> }
             </div>
           </div>
           <div className="form-group col-xs-5">
@@ -85,7 +86,8 @@ class Records extends Component {
                 onDayChange={this.handleDayChange.bind(this)}
                 format={'DD.MM.YYYY'}
                 placeholder={`Date to`}/>
-              {this.state.filter.dateTo && <a title="Clear field" className="btn btn-danger clearDateButton" onClick={this.clearDateTo.bind(this)}>X</a> }
+              {this.state.filter.dateTo && <a title="Clear field" className="btn btn-danger clearDateButton"
+                                              onClick={this.clearDateTo.bind(this)}>X</a> }
             </div>
           </div>
           <div className="form-group col-xs-2">
@@ -153,6 +155,9 @@ export default connect(
     },
     clearStatus: () => {
       dispatch(clearStatus());
+    },
+    clearFormData: () => {
+      dispatch(clearFormData());
     }
   })
 )(Records);

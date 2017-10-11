@@ -27,6 +27,7 @@ class ARForm extends Component {
     }
     if (!Object.keys(this.props.allRecordForm.errors).length && Object.keys(nextProps.allRecordForm.errors).length) {
       NotificationManager.error('Form filling error', 'Form');
+      this.props.allRecordForm.errors = [];
     }
   }
 

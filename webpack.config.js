@@ -38,6 +38,16 @@ module.exports = {
       CONFIG: JSON.stringify(config)
     })
   ],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true,
+    disableHostCheck: true,
+    headers: {
+      "Access-Control-Allow-Origin": "null",
+      "Access-Control-Allow-Credentials": "true"
+    }
+  },
 /*  devServer: {
  open: false,
  host: SERVER_LOCAL.host,

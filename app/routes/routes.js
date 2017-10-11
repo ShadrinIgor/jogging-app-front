@@ -33,19 +33,16 @@ class Routes extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('componentWillUpdate', nextProps.auth.data);
     if(!this.state.user.id && nextProps.auth.data){
       this.setState({user:  nextProps.auth.data.user});
-      console.log('componentWillUpdate 2', nextProps.auth.data.user);
     }
   }
 
   render() {
-    console.log('state', this.state);
     return (
       <div className="container">
         <Header />
-        {isAuth() && <Menu role={this.state.user.role}/>}
+        {isAuth() && <Menu active={this.props.location.pathname} role={this.state.user.role}/>}
         {isAuth() && <Switch>
           <Route exact path='/' render={props => (
             isAuth() ? <Records /> : <RegistrationForm />

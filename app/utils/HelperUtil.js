@@ -14,7 +14,6 @@ export const getSpeed = (distance, time) => {
 export const getOrderIco = (sort, field) => {
   let style = 'glyphicon';
   if(sort.field === field){
-    console.log();
     style += sort.type === 'asc' ? ' glyphicon-sort-by-attributes' : ' glyphicon-sort-by-attributes-alt'
   } else {
     style += ' glyphicon-sort';

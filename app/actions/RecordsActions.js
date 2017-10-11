@@ -1,7 +1,7 @@
 import request from 'superagent';
 import moment from 'moment';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
-import {GET_LIST, SAVE_RECORD, GET_RECORD, DELETE_RECORD, RECORD_CLEAR_STATUS, GET_ALL_LIST} from '../constants/records';
+import {GET_LIST, SAVE_RECORD, GET_RECORD, DELETE_RECORD, RECORD_CLEAR_STATUS, RECORD_CLEAR_FORM_DATA} from '../constants/records';
 import {getJWT} from '../utils/AuthUtil';
 
 export function save(data) {
@@ -125,6 +125,14 @@ export function clearStatus() {
   return dispatch => {
     dispatch({
       type: `${RECORD_CLEAR_STATUS}${_SUCCESS}`
+    });
+  }
+}
+
+export function clearFormData() {
+  return dispatch => {
+    dispatch({
+      type: `${RECORD_CLEAR_FORM_DATA}${_SUCCESS}`
     });
   }
 }

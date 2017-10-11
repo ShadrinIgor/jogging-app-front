@@ -1,7 +1,7 @@
-import {GET_LIST, DELETE_RECORD, RECORD_CLEAR_STATUS} from '../constants/records';
+import {DELETE_RECORD, GET_LIST, RECORD_CLEAR_STATUS} from '../constants/records';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
 
-const initialState = {list:[], status: ''};
+const initialState = {list: [], status: ''};
 
 export default function auth(state = initialState, action) {
   switch (action.type) {

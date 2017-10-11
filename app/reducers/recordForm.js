@@ -1,4 +1,4 @@
-import {SAVE_RECORD, GET_RECORD} from '../constants/records';
+import {SAVE_RECORD, GET_RECORD, RECORD_CLEAR_FORM_DATA} from '../constants/records';
 import {_FAILURE, _SUCCESS} from '../constants/baseTypes';
 
 const initialState = {
@@ -24,6 +24,9 @@ export default (state = initialState, action) => {
 
     case `${GET_RECORD}${_FAILURE}` :
       return {...state, errors: action.data.errors, status: 'error'};
+
+    case `${RECORD_CLEAR_FORM_DATA}${_SUCCESS}` :
+      return initialState;
 
     default :
       return state

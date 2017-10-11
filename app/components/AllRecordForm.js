@@ -37,7 +37,6 @@ export default class RecordForm extends Component {
       return vals.date && vals.distance && vals.time
     };
     const {errors} = this.props.allRecordForm;
-    console.log(1, this.props.users);
 
     return <Panel header={this.props.allRecordForm._id.length ? "Update record" : "Add record"} bsStyle="success">
       <Form model="allRecordForm" onSubmit={(val) => this.handleSubmit.call(this, val)}

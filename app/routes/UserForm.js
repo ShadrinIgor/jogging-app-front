@@ -26,7 +26,6 @@ class UForm extends Component {
       NotificationManager.success('User success save', 'Form');
     }
     if (!Object.keys(this.props.userForm.errors).length && Object.keys(nextProps.userForm.errors).length) {
-      console.log('error', nextProps.userForm.errors);
       let errorMessage = 'Form filling error';
       if(nextProps.userForm.errors['role']){
         errorMessage = nextProps.userForm.errors['role'];

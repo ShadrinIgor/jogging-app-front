@@ -39,7 +39,6 @@ class AllRecords extends Component {
   }
 
   render() {
-    console.log('1', this.state);
     const {allRecords} = this.props;
     return <Panel header="All records" bsStyle="success">
       <NotificationContainer />
